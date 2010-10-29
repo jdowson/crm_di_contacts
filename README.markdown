@@ -1,13 +1,7 @@
-crm_di_core
-===========
+#crm_di_core
 
 Experimental plugin module for Fat Free CRM.
 
 
-Example
-=======
 
-TBA.
-
-
-Copyright (c) 2010 Delta Indigo Ltd., released under the MIT license
+Copyright (c) 2010 [Delta Indigo Ltd.](http://www.deltindigo.com/), released under the MIT license
