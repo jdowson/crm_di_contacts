@@ -1,13 +1,13 @@
-CrmDiCore
-=========
+crm_di_core
+===========
 
-Introduction goes here.
+Experimental plugin module for Fat Free CRM.
 
 
 Example
 =======
 
-Example goes here.
+TBA.
 
 
-Copyright (c) 2010 [name of plugin creator], released under the MIT license
+Copyright (c) 2010 Delta Indigo Ltd., released under the MIT license
