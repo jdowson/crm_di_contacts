@@ -18,6 +18,15 @@ FatFreeCRM::Plugin.register(:crm_di_core, initializer) do
   dependencies :haml
 # dependencies :"acts-as-taggable-on", :haml, :simple_column_search, :will_paginate
 
+  # Remove non-functional admin tabs
+  tab :admin do |tabs|
+    tabs.delete_at(1)                                 # Delete settings tab.
+    tabs.delete_at(1)                                 # Delete plugins tab.
+  end
+  
+  # New admin tabs
+  tab :admin, :text => "Lookups", :url => { :controller => "lookups" }
+
 end
   
 # delegate the rest to lib/crm_di_core.rb
