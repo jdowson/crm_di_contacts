@@ -7,7 +7,7 @@
 %span{:style => "float:right"}
   = "#{t :parent_lookups, :scope=> [:di, :lookups]}: #{link_to_parents(@lookup)}" unless @lookup.parent.nil?
 
-.list#lookupparrent= render :partial => "lookup", :object => @lookup
+.list#lookupparrent= render :partial => "lookup", :object => @lookup, :locals => {:hide_child_count => true}
 %br
 
 .title_tools

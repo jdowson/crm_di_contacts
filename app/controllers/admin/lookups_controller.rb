@@ -7,12 +7,27 @@ class Admin::LookupsController < Admin::ApplicationController
   before_filter :auto_complete, :only => :auto_complete 
 
   
+  # Store current selection when using simple column search
+  #----------------------------------------------------------------------------
+  def current_selection=(selection)
+    @current_selection = session["#{controller_name}_current_selection".to_sym] = selection.to_i
+  end
+
+  #----------------------------------------------------------------------------
+  def current_selection
+    selection = params[:id] || session["#{controller_name}_current_selection".to_sym] || 0
+    @current_selection = selection.to_i
+  end
+
+
   #----------------------------------------------------------------------------
   # GET /admin/lookups/1
   # GET /admin/lookups/1.xml
   #----------------------------------------------------------------------------
   def show
 
+    self.current_query = ''
+    
     @lookup  = Lookup.find(params[:id])
     @lookups = get_child_lookups(@lookup, :page => params[:page])
 
@@ -32,6 +47,8 @@ class Admin::LookupsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def index
 
+    self.current_query = ''
+    
     @lookups = get_root_lookups(:page => params[:page])
 
     respond_to do |format|
@@ -113,7 +130,7 @@ class Admin::LookupsController < Admin::ApplicationController
 
     respond_to do |format|
       if @lookup.save
-        @lookups = get_lookups
+        @lookups = @lookup.parent.nil? ? get_root_lookups : get_child_lookups(@lookup.parent)
         format.js   # create.js.rjs
         format.xml  { render :xml => @lookup, :status => :created, :location => @lookup }
       else
@@ -219,15 +236,35 @@ class Admin::LookupsController < Admin::ApplicationController
     end
   end
 
+  #----------------------------------------------------------------------------
+  # GET /admin/users/search/query                                          AJAX
+  #----------------------------------------------------------------------------
+  def search
 
+    if(self.current_selection == 0)
+      @lookups = get_root_lookups(:query => params[:query], :page => 1)
+    else
+      @lookup  = Lookup.find(self.current_selection)
+      @lookups = get_child_lookups(@lookup, :query => params[:query], :page => 1)
+    end
+    
+    respond_to do |format|
+      format.js   { render :action => :index }
+      format.xml  { render :xml => @lookups.to_xml }
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    respond_to_not_found(:js, :xml)
+  end
+
+  
   private
 
   #----------------------------------------------------------------------------
-  def get_lookups(selection, options)
+  def get_lookups(selection, options = { :page => nil, :query => nil })
 
-    # Note: No real query support in lookups UI  but included for consistancy
-    self.current_page  = options[:page]  if options[:page]
-    self.current_query = options[:query] if options[:query]
+    self.current_page      = options[:page]  if options[:page]
+    self.current_query     = options[:query] if options[:query]
 
     if current_query.blank?
       selection.paginate(:page => current_page)
@@ -239,11 +276,13 @@ class Admin::LookupsController < Admin::ApplicationController
     
   #----------------------------------------------------------------------------
   def get_root_lookups(options = { :page => nil, :query => nil })
+    self.current_selection = 0
     get_lookups Lookup.root_lookups, options
   end
 
   #----------------------------------------------------------------------------
   def get_child_lookups(parent, options = { :page => nil, :query => nil })
+    self.current_selection = parent.id
     get_lookups parent.lookups, options
   end
 

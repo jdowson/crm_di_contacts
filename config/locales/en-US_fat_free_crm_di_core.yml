@@ -1,8 +1,15 @@
 en-US:
-  language: English
+
+  #----------------------------------------------------------------------------
+  # Limited global additions.
+  #----------------------------------------------------------------------------
+  lookups_small:       lookups
 
   di:
 
+    #----------------------------------------------------------------------------
+    # Plugin wide strings.
+    #----------------------------------------------------------------------------
     active:             Active
     inactive:           Inactive
     unpublished:        Unpublished
@@ -29,14 +36,17 @@ en-US:
 
       title:                    Lookups
       lookup:                   Lookup
+      details:                  Lookup Details
+      root:                     Root Lookups
       create:                   Create Lookup
       create_child:             Create Child Lookup
       children:                 Child Lookups
       child_count_small:        child lookups
       save_lookup:              Save Lookup
       parent_lookups:           Parent Path
+
       name:                     Lookup Name
       description:              Description
-      confirm_delete:           Are you sure you want to delete this lookup?
 
+      confirm_delete:           Are you sure you want to delete this lookup?
       msg_cant_delete:          "^Couldn't delete the %{value} lookup as it has child lookups."

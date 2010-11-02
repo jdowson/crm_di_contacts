@@ -15,9 +15,10 @@ class Lookup < ActiveRecord::Base
   acts_as_paranoid
 
   # Default behaviour
-  default_scope :order      => 'name ASC'
-  default_scope :conditions => { :deleted_at => nil }
+  default_scope   :order      => 'name ASC'
   
+  simple_column_search :name, :description, :escape => lambda { |query| query.gsub(/[^\w\s\-\.']/, "").strip }
+
   # Validations
   validates_presence_of   :name, :lookup_type, :status
 
