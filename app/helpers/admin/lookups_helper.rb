@@ -27,8 +27,21 @@ module Admin::LookupsHelper
   end
 
   #----------------------------------------------------------------------------
+  def link_to_parents(lookup)
+    p = lookup.parent
+    s = ""
+
+    until p.nil?
+      s = link_to(h(p.name), admin_lookup_path(p)) << (s.empty? ? "" : " | ") << s
+      p = p.parent
+    end
+    
+    s
+  end
+  
+  #----------------------------------------------------------------------------
   def link_to_delete(lookup)
-    link_to_remote(t(:yes_button, :scope=> [:di, :lookups]), 
+    link_to_remote(t(:yes_button), 
       :method => :delete,
       :url => admin_lookup_path(lookup),
       :before => visual_effect(:highlight, dom_id(lookup), :startcolor => "#ffe4e1")

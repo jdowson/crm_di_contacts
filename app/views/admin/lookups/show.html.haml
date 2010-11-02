@@ -1,16 +1,15 @@
 = styles_for :lookup
 
-.title= h(@lookup.name)
+.title= t(:lookup, :scope=> [:di, :lookups]) << " " << h(@lookup.name)
 
-= "<br/>#{t :parent_lookup_small, :scope=> [:di, :lookups]}: <b>#{link_to(h(@lookup.parent.name), admin_lookup_path(@lookup.parent))}</b>" unless @lookup.parent.nil?
+%br
+= link_to t(:show_all, :scope => [:di]), admin_lookups_path
+%span{:style => "float:right"}
+  = "#{t :parent_lookups, :scope=> [:di, :lookups]}: #{link_to_parents(@lookup)}" unless @lookup.parent.nil?
 
 .list#lookupparrent= render :partial => "lookup", :object => @lookup
+%br
 
-%p
-:erb
-  <%= link_to t(:show_all, :scope => [:di]), admin_lookups_path %>
-%br
-%br
 .title_tools
   = link_to_inline(:create_lookup, new_admin_lookup_path << '/' << @lookup.id.to_s, :text => t(:create_child, :scope=> [:di, :lookups]))
 

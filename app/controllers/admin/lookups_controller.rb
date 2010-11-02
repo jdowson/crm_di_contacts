@@ -1,10 +1,10 @@
 
 class Admin::LookupsController < Admin::ApplicationController
 
-  # unloadable
+  unloadable
 
   before_filter :set_current_tab, :only => [ :index, :show ]
-  before_filter :auto_complete, :only => :auto_complete
+  before_filter :auto_complete, :only => :auto_complete 
 
   
   #----------------------------------------------------------------------------
@@ -12,7 +12,8 @@ class Admin::LookupsController < Admin::ApplicationController
   # GET /admin/lookups/1.xml
   #----------------------------------------------------------------------------
   def show
-    @lookup =  Lookup.find(params[:id])
+
+    @lookup  = Lookup.find(params[:id])
     @lookups = get_child_lookups(@lookup, :page => params[:page])
 
     respond_to do |format|
@@ -31,7 +32,7 @@ class Admin::LookupsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def index
 
-    @lookups = get_lookups(:page => params[:page])
+    @lookups = get_root_lookups(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.haml
@@ -222,33 +223,28 @@ class Admin::LookupsController < Admin::ApplicationController
   private
 
   #----------------------------------------------------------------------------
-  def get_lookups(options = { :page => nil, :query => nil })
+  def get_lookups(selection, options)
 
+    # Note: No real query support in lookups UI  but included for consistancy
     self.current_page  = options[:page]  if options[:page]
     self.current_query = options[:query] if options[:query]
 
     if current_query.blank?
-      Lookup.root_lookups.paginate(:page => current_page)
+      selection.paginate(:page => current_page)
     else
-      Lookup.root_lookups.search(current_query).paginate(:page => current_page)
+      selection.search(current_query).paginate(:page => current_page)
     end
 
   end
+    
+  #----------------------------------------------------------------------------
+  def get_root_lookups(options = { :page => nil, :query => nil })
+    get_lookups Lookup.root_lookups, options
+  end
 
-  
   #----------------------------------------------------------------------------
   def get_child_lookups(parent, options = { :page => nil, :query => nil })
-
-    self.current_page  = options[:page]  if options[:page]
-    self.current_query = options[:query] if options[:query]
-
-    if current_query.blank?
-      parent.lookups.paginate(:page => current_page)
-    else
-      parent.lookups.search(current_query).paginate(:page => current_page)
-    end
-
+    get_lookups parent.lookups, options
   end
 
-  
 end

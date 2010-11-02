@@ -25,9 +25,9 @@
 
     %span.black #{link_to(h(lookup.name), admin_lookup_path(lookup))}
     %tt
-      = "- #{h(lookup.description)}" unless lookup.description.blank?
+      = " - #{h(lookup.description)}" unless lookup.description.blank?
 
     %dt{ :style => "padding: 2px 0px 0px 0px" }
-      = "#{t :child_count_small, :scope=> [:di, :lookups]}: <b>#{lookup.lookups.length}</b> | "
+      = "#{t :child_count_small, :scope=> [:di, :lookups]}: <b>#{lookup.lookups.length}</b> | " if defined? show_child_count
       = "#{t :created_at_small, :scope=> [:di]}: <b>#{l(lookup.created_at, :format => :short)}</b> | "
       = "#{t :updated_at_small, :scope=> [:di]}: <b>#{l(lookup.updated_at, :format => :short)}</b>"

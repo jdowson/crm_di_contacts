@@ -27,10 +27,6 @@ li.lookup .inactive
     :background gainsboro
 EOS
 
-#.lookups
-#    :background blue
-#    :color green
-
   # Install inline style hook
   def inline_styles(view, context = {})
 

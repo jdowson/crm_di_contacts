@@ -28,15 +28,15 @@ en-US:
     lookups:
 
       title:                    Lookups
+      lookup:                   Lookup
       create:                   Create Lookup
       create_child:             Create Child Lookup
       children:                 Child Lookups
       child_count_small:        child lookups
       save_lookup:              Save Lookup
-      yes_button:               Delete Lookup
-      parent_lookup_small:      parent lookup
+      parent_lookups:           Parent Path
       name:                     Lookup Name
       description:              Description
       confirm_delete:           Are you sure you want to delete this lookup?
 
-      msg_cant_delete:          "^Couldn't delete the %{value} lookup."
+      msg_cant_delete:          "^Couldn't delete the %{value} lookup as it has child lookups."
