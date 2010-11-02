@@ -1,0 +1,3 @@
+page[:lookups].replace_html render(:partial => "lookup", :collection => @lookups)
+page[:paginate].replace_html render(:partial => "common/paginate")
+ 

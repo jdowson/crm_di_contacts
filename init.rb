@@ -18,6 +18,10 @@ FatFreeCRM::Plugin.register(:crm_di_core, initializer) do
   dependencies :haml
 # dependencies :"acts-as-taggable-on", :haml, :simple_column_search, :will_paginate
 
+#puts "X" * 80
+#puts locale_path()
+#puts "X" * 80
+  
   # Remove non-functional admin tabs
   tab :admin do |tabs|
     tabs.delete_at(1)                                 # Delete settings tab.

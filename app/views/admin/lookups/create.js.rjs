@@ -1,0 +1,11 @@
+if @lookup.valid?
+  page[:create_lookup_arrow].replace_html "&#9658;"
+  page[:create_lookup_title].replace_html t(:title, :scope => [:di, :lookups])
+  page.visual_effect :toggle_blind, :create_lookup, :duration => 0.3, :afterFinish => 'function(effect) {effect.element.update("")}'
+  page.insert_html :top, :lookups, :partial => "lookup", :collection => [ @lookup ]
+  page[dom_id(@lookup)].visual_effect :highlight, :duration => 1.5
+else
+  page[:create_lookup].replace_html :partial => "create"
+  page[:create_lookup].visual_effect :shake, :duration => 0.25, :distance => 6
+  page[:lookup_name].focus
+end 

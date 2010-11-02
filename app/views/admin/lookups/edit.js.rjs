@@ -1,0 +1,21 @@
+id = dom_id(@lookup)
+
+if params[:cancel].true?     # <----------------- Hide [Edit User]
+  page[id].replace :partial => "lookup", :collection => [ @lookup ]
+
+else # <----------------------------------------  Show [Edit User] form.
+
+  if @previous                                    # Hide open [Edit Lookup] form if any.
+    if @previous.is_a?(Lookup)                    # Previous lookup still exists?
+      page[dom_id(@previous)].replace :partial => "lookup", :collection => [ @previous ]
+    else
+      page.call "crm.flick", "lookup_#{@previous}", :remove
+    end
+  end
+
+  page.call "crm.highlight_off", id               # Disable onMouseOver for the list item.
+  page.call "crm.hide_form", :create_lookup       # Hide [Create User] form if any.
+  page[id].replace_html :partial => "edit"        # Show [Edit User] form.
+  page[:lookup_name].focus
+
+end

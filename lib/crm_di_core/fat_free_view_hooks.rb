@@ -17,7 +17,34 @@ EOS
 .mongnessItem= side_bar_item("Mongness", model.mongness)
 EOS
 
-  # Install view hooks
+
+  INLINE_STYLES_LOOKUPS_INDEX = <<EOS
+li.lookup .active
+    :background lightgreen
+li.lookup .unpublished
+    :background lightblue
+li.lookup .inactive
+    :background gainsboro
+EOS
+
+#.lookups
+#    :background blue
+#    :color green
+
+  # Install inline style hook
+  def inline_styles(view, context = {})
+
+    if(view.controller.controller_name == 'lookups')
+
+      if(view.controller.action_name == 'index' || view.controller.action_name == 'show')
+        Sass::Engine.new(INLINE_STYLES_LOOKUPS_INDEX).render
+      end
+
+    end
+
+  end
+
+  # Install view hooks for models
   [ :contact ].each do |model|
 
     define_method :"#{model}_top_section_bottom" do |view, context|

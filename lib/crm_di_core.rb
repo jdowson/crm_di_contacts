@@ -3,6 +3,12 @@
 # lib/crm_di_core.rb
 # Main plugin initializer
 
+# Load some standard libraries
+require "di_utils"
+
+sendd __FILE__, "Booting"
+
+
 # add modules to path and change ActiveSupport handling
 # changes reloading behaviour??????
 %w{ models controllers helpers }.each do |dir|
@@ -15,11 +21,6 @@
   ActiveSupport::Dependencies.load_once_paths.delete(path)
 
 end
-
-# load some standard libraries
-require "di_utils"
-
-sendd __FILE__, "Booting"
 
 # Fat Free integration
 require File.join(File.dirname(__FILE__), "crm_di_core", "fat_free_view_hooks")

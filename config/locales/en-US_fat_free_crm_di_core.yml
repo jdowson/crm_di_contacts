@@ -1,0 +1,42 @@
+en-US:
+  language: English
+
+  di:
+
+    active:             Active
+    inactive:           Inactive
+    unpublished:        Unpublished
+
+    activate:           Activate
+    inactivate:         Inactivate
+    publish:            Publish
+    unpublish:          Unpublish
+
+    delete:             Delete
+    show_all:           Show All
+
+    audit_information:  Audit Information
+    created_at:         Created
+    updated_at:         Updated
+    created_at_small:   created
+    updated_at_small:   updated
+
+
+    #----------------------------------------------------------------------------
+    # Lookups.
+    #----------------------------------------------------------------------------
+    lookups:
+
+      title:                    Lookups
+      create:                   Create Lookup
+      create_child:             Create Child Lookup
+      children:                 Child Lookups
+      child_count_small:        child lookups
+      save_lookup:              Save Lookup
+      yes_button:               Delete Lookup
+      parent_lookup_small:      parent lookup
+      name:                     Lookup Name
+      description:              Description
+      confirm_delete:           Are you sure you want to delete this lookup?
+
+      msg_cant_delete:          "^Couldn't delete the %{value} lookup."

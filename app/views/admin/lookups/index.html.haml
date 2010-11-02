@@ -1,3 +1,12 @@
-%h3 Lookup management
-%br
-%i To be implemented
+= styles_for :lookup
+
+.title_tools
+  = link_to_inline(:create_lookup, new_admin_lookup_path, :text => t(:create, :scope=> [:di, :lookups]))
+
+.title
+  %span#create_lookup_title #{t :title, :scope=> [:di, :lookups]}
+  = image_tag("loading.gif", :size => "16x16", :id => "loading", :style => "display: none;")
+.remote#create_lookup{ hidden }
+
+.list#lookups= render :partial => "lookup", :collection => @lookups
+#paginate= render :partial => "common/paginate"
