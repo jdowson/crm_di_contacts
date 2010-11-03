@@ -1,0 +1,12 @@
+= styles_for :lookup
+
+.title_tools
+  = link_to_inline(:create_lookup, new_admin_lookup_item_path, :text => t(:create, :scope=> [:di, :lookups, :items]))
+
+.title
+  %span#create_lookup_title #{t :title, :scope=> [:di, :lookups, :items]}
+  = image_tag("loading.gif", :size => "16x16", :id => "loading", :style => "display: none;")
+.remote#create_lookup{ hidden }
+
+.list#lookupitems= render :partial => "lookup_item", :collection => @lookup_items
+#paginate= render :partial => "common/paginate"

@@ -5,11 +5,11 @@ one:
   parent_id: 1
   description: MyString
   status: MyString
-  type: MyString
+  lookup_type: MyString
 
 two:
   name: MyString
   parent_id: 1
   description: MyString
   status: MyString
-  type: MyString
+  lookup_type: MyString

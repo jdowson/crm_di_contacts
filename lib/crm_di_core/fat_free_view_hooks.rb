@@ -18,12 +18,21 @@ EOS
 EOS
 
 
-  INLINE_STYLES_LOOKUPS_INDEX = <<EOS
+  INLINE_STYLES_LOOKUPS = <<EOS
 li.lookup .active
     :background lightgreen
 li.lookup .unpublished
     :background lightblue
 li.lookup .inactive
+    :background gainsboro
+EOS
+
+  INLINE_STYLES_LOOKUP_ITEMS = <<EOS
+li.lookup_item .active
+    :background lightgreen
+li.lookup_item .unpublished
+    :background lightblue
+li.lookup_item .inactive
     :background gainsboro
 EOS
 
@@ -33,7 +42,15 @@ EOS
     if(view.controller.controller_name == 'lookups')
 
       if(view.controller.action_name == 'index' || view.controller.action_name == 'show')
-        Sass::Engine.new(INLINE_STYLES_LOOKUPS_INDEX).render
+        Sass::Engine.new(INLINE_STYLES_LOOKUPS).render
+      end
+
+    end
+
+    if(view.controller.controller_name == 'lookup_items')
+
+      if(view.controller.action_name == 'index' || view.controller.action_name == 'show')
+        Sass::Engine.new(INLINE_STYLES_LOOKUP_ITEMS).render
       end
 
     end

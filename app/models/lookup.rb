@@ -11,6 +11,9 @@ class Lookup < ActiveRecord::Base
                      :class_name  => 'Lookup'
                      # ,:dependent   => :destroy
 
+  has_many :items,   :class_name  => 'LookupItem',
+                     :dependent   => :destroy
+
   # Standard Plugins
   acts_as_paranoid
 

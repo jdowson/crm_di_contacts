@@ -1,0 +1,34 @@
+%li[lookup_item]{ highlightable(dom_id(lookup_item, :tools)) }
+
+  - if lookup_item.active?
+    .strip.active #{t :active, :scope=> [:di]}
+  - elsif lookup_item.unpublished?
+    .strip.unpublished #{t :unpublished, :scope=> [:di]}
+  - else
+    .strip.inactive #{t :inactive, :scope=> [:di]}
+
+  .indent
+    .tools{ invisible, :id => dom_id(lookup_item, :tools) }
+
+      = link_to_edit(lookup_item) << " | "
+
+      - if lookup_item.active?
+        = link_to_unpublish(lookup_item) << " | "
+
+      - if lookup_item.unpublished?
+        = link_to_publish(lookup_item) << " | "
+        = link_to_inactivate(lookup_item) << " | "
+
+      - if lookup_item.inactive?
+        = link_to_activate(lookup_item) << " | "
+
+      = link_to_confirm(lookup_item)
+
+    %span.black #{link_to(h(lookup_item.description), admin_lookup_item_path(lookup_item))}
+    %tt
+      = " - #{h(lookup_item.code)}" unless lookup_item.description.blank?
+
+    %dt{ :style => "padding: 2px 0px 0px 0px" }
+      = "#{h(lookup_item.long_description)} | " unless lookup_item.long_description.blank?
+      = "#{t :created_at_small, :scope=> [:di]}: <b>#{l(lookup_item.created_at, :format => :short)}</b> | "
+      = "#{t :updated_at_small, :scope=> [:di]}: <b>#{l(lookup_item.updated_at, :format => :short)}</b>"
