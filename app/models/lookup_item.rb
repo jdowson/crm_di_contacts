@@ -115,7 +115,57 @@ class LookupItem < ActiveRecord::Base
   def inactivate!
     self.update_attribute(:status, "Inactive")
   end
+
+  # Get sibling lookup items (same lookup, same parent, sequence sorted
+  #----------------------------------------------------------------------------
+  def siblings
+    LookupItem.find_all_by_lookup_id_and_parent_id(self.lookup_id, self.parent_id).sort! { |a,b| a.sequence <=> b.sequence }
+  end
   
+  # Assign new item next sequence among siblings
+  #----------------------------------------------------------------------------
+  def assign_next_sequence
+
+    s = siblings
+    
+    self.sequence = s.empty? ? 1 : (s.last.sequence + 1)
+  
+  end
+  
+  # Move item up amongst its siblings
+  #----------------------------------------------------------------------------
+  def move_up!
+    
+    cur  = self.sequence
+
+    swap = LookupItem.find_by_lookup_id_and_parent_id_and_sequence(self.lookup_id, self.parent_id, self.sequence - 1)
+    
+    self.update_attribute(:sequence, cur - 1)
+    swap.update_attribute(:sequence, cur)  
+    
+  end
+  
+  # Move item down amongst its siblings
+  #----------------------------------------------------------------------------
+  def move_down!
+
+    cur  = self.sequence
+
+    swap = LookupItem.find_by_lookup_id_and_parent_id_and_sequence(self.lookup_id, self.parent_id, self.sequence + 1)
+    
+    self.update_attribute(:sequence, cur + 1)
+    swap.update_attribute(:sequence, cur)  
+    
+  end
+
+
+  # Is this the last sibling?
+  #----------------------------------------------------------------------------
+  def last_sibling?
+    self.sequence == siblings.last.sequence
+  end
+
+
 
   private
   
@@ -123,7 +173,7 @@ class LookupItem < ActiveRecord::Base
   # Prevent deleting a lookup if it has child lookups
   #----------------------------------------------------------------------------
   def check_if_has_children
-    false #self.lookups.count == 0
+    self.items.count == 0
   end
   
   

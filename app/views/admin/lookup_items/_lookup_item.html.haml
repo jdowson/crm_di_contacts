@@ -11,6 +11,8 @@
     .tools{ invisible, :id => dom_id(lookup_item, :tools) }
 
       = link_to_edit(lookup_item) << " | "
+      = link_to_moveup(lookup_item) << " | " unless lookup_item.sequence == 1
+      = link_to_movedown(lookup_item) << " | " unless lookup_item.last_sibling?
 
       - if lookup_item.active?
         = link_to_unpublish(lookup_item) << " | "

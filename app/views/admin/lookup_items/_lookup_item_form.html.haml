@@ -1,0 +1,38 @@
+- edit ||= false
+.section
+  = f.hidden_field :parent_id
+  = f.hidden_field :lookup_id
+  = f.hidden_field :sequence
+  %table(width=500 cellpadding=0 cellspacing=0)
+    %tr
+      %td(valign="top")
+        .label.top.req #{t :code, :scope => [:di, :lookups, :items]}:
+        = f.text_field :code, :style => "width:240px"
+      %td= spacer
+      %td(valign="top")
+        .label.top.req #{t :description, :scope => [:di, :lookups, :items]}:
+        = f.text_field :description, :style => "width:240px"
+    %tr
+      %td(valign="top"){:colspan => "3"}
+        .label.top.req #{t :long_description, :scope => [:di, :lookups, :items]}:
+        = f.text_field :long_description, :style => "width:495px"
+    %tr
+      %td(valign="top")
+        .label.top.req #{t :item_type, :scope => [:di, :lookups, :items]}:
+        = f.select :item_type, options_for_select([ "Editable", "Standard", "Non-selectable" ], @lookup_item.item_type), { :include_blank => false }, { :style => "width:240px" }
+      %td= spacer
+      %td(valign="top")
+        .label.top.req #{t :html_color, :scope => [:di, :lookups, :items]}:
+        = f.text_field :html_color, :style => "width:200px"
+- unless @lookup_item.created_at.nil?
+  .subtitle #{t :audit_information, :scope => [:di]}
+  .section
+    %table(width=500 cellpadding=0 cellspacing=0)
+      %tr
+        %td(valign="top")
+          .label #{t :created_at, :scope => [:di]}:
+          %b #{l(@lookup_item.created_at, :format => :long)} 
+        %td= spacer
+        %td(valign="top")
+          .label #{t :updated_at, :scope => [:di]}:
+          %b #{l(@lookup_item.updated_at, :format => :long)} 

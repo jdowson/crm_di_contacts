@@ -18,7 +18,8 @@ en-US:
     inactivate:         Inactivate
     publish:            Publish
     unpublish:          Unpublish
-
+    move_up:            Move Up
+    move_down:          Move Down
     delete:             Delete
     show_all:           Show All
 
@@ -53,8 +54,21 @@ en-US:
 
       items:
 
+        # General Captions
         title:                    Lookup Items
         lookup:                   Lookup Item
         details:                  Lookup Item Details
         create:                   Create Lookup Item
         save:                     Save Lookup Item
+
+        # Prompts
+        confirm_delete:           Are you sure you want to delete this lookup item?
+        msg_cant_delete:          "^Couldn't delete the %{value} lookup item as it has child items."
+
+        # Form Fields
+        code:                     Code
+        description:              Description
+        long_description:         Long Description
+        item_type:                Type
+        html_color:               HTML Color
+        language:                 Language ID

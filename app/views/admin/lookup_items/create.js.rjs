@@ -1,0 +1,14 @@
+if @lookup_item.valid?
+  page[:create_lookup_item_arrow].replace_html "&#9658;"
+  page[:create_lookup_item_title].replace_html t(:title, :scope => [:di, :lookups, :items])
+  page.visual_effect :toggle_blind, :create_lookup_item, :duration => 0.3, :afterFinish => 'function(effect) {effect.element.update("")}'
+
+  page[:lookup_items].replace_html render(:partial => "lookup_item", :collection => @lookup_items)
+  page[:paginate].replace_html render(:partial => "common/paginate")
+
+  page[dom_id(@lookup_item)].visual_effect :highlight, :duration => 1.5
+else
+  page[:create_lookup_item].replace_html :partial => "create"
+  page[:create_lookup_item].visual_effect :shake, :duration => 0.25, :distance => 6
+  page[:lookup_item_code].focus
+end 

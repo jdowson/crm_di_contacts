@@ -46,6 +46,12 @@ class Lookup < ActiveRecord::Base
     self.class.find_by_id(self.parent_id) unless self.parent_id.nil?
   end
   
+  # Get the items for a particular parent lookup item
+  #----------------------------------------------------------------------------
+  def items_for_parent(parent_id)
+    items.find_all_by_parent_id(parent_id).sort! { |a,b| a.sequence <=> b.sequence }
+  end
+  
   # Is the lookup active?
   #----------------------------------------------------------------------------
   def active?
