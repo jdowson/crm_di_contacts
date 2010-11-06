@@ -155,7 +155,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
     @lookup_item.unpublish!
     
     respond_to do |format|
-      format.js   # unpublish.js.rjs
+      format.js   { render :action => :update_no_form }
       format.xml  { render :xml => @lookup_item }
     end
 
@@ -173,7 +173,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
     @lookup_item.activate!
     
     respond_to do |format|
-      format.js   # publish.js.rjs
+      format.js   { render :action => :update_no_form }
       format.xml  { render :xml => @lookup_item }
     end
 
@@ -191,7 +191,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
     @lookup_item.inactivate!
     
     respond_to do |format|
-      format.js   # publish.js.rjs
+      format.js   { render :action => :update_no_form }
       format.xml  { render :xml => @lookup_item }
     end
 

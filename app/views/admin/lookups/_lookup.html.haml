@@ -9,6 +9,10 @@
 
   .indent
     .tools{ invisible, :id => dom_id(lookup, :tools) }
+
+      - if lookup.parent_id.nil?
+        = link_to_items(lookup) << " | "
+
       = link_to_edit(lookup) << " | "
 
       - if lookup.active?

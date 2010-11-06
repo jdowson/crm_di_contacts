@@ -1,0 +1,8 @@
+id = dom_id(@lookup)
+
+if @lookup.errors.empty?
+  page[id].replace :partial => "lookup", :collection => [ @lookup ]
+  page[id].visual_effect :highlight, :duration => 1.0
+else  
+  page[id].visual_effect :shake, :duration => 0.25, :distance => 6
+end 

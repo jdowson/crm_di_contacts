@@ -1,3 +1,0 @@
-id = dom_id(@lookup_item)
-page[id].replace :partial => "lookup_item", :collection => [ @lookup_item ]
-page[id].visual_effect :highlight, :duration => 1.0

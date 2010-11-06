@@ -26,7 +26,7 @@
 
       = link_to_confirm(lookup_item)
 
-    %span.black #{link_to(h(lookup_item.description), admin_lookup_item_path(lookup_item))}
+    %span.black #{link_to(h(lookup_item.description), admin_lookup_lookup_item_path(lookup_item.lookup_id, lookup_item))}
     %tt
       = " - #{h(lookup_item.code)}" unless lookup_item.description.blank?
 

@@ -4,7 +4,6 @@ if @lookup_item.errors.empty?
   page[id].replace :partial => "lookup_item", :collection => [ @lookup_item ]
   page[id].visual_effect :highlight, :duration => 1.0
 else  
-  page[id].replace_html :partial => "edit"
   page[id].visual_effect :shake, :duration => 0.25, :distance => 6
-  page[:lookup_item_code].focus
 end
+ 

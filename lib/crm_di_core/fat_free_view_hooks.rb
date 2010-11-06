@@ -39,21 +39,15 @@ EOS
   # Install inline style hook
   def inline_styles(view, context = {})
 
-    if(view.controller.controller_name == 'lookups')
-
-      if(view.controller.action_name == 'index' || view.controller.action_name == 'show')
-        Sass::Engine.new(INLINE_STYLES_LOOKUPS).render
+    if(view.controller.action_name == 'index' || view.controller.action_name == 'show')
+      styles = case view.controller.controller_name
+        when "lookups"      then INLINE_STYLES_LOOKUPS
+        when "lookup_items" then INLINE_STYLES_LOOKUP_ITEMS
+        else ""
       end
-
     end
 
-    if(view.controller.controller_name == 'lookup_items')
-
-      if(view.controller.action_name == 'index' || view.controller.action_name == 'show')
-        Sass::Engine.new(INLINE_STYLES_LOOKUP_ITEMS).render
-      end
-
-    end
+    Sass::Engine.new(styles).render unless styles.empty?
 
   end
 
