@@ -1,6 +1,13 @@
 = styles_for :lookup
 
 .title_tools
+
+  = link_to_remote(t(:sort_a_z_description, :scope=> [:di, :lookups, :items]) + "!", :method => :put, :url => sort_a_z_description_admin_child_lookup_items_path(@lookup.id, nilz(@parent_id))) << " | "
+
+  = link_to_remote(t(:sort_a_z_code, :scope=> [:di, :lookups, :items]) + "!", :method => :put, :url => sort_a_z_code_admin_child_lookup_items_path(@lookup.id, nilz(@parent_id))) << " | "
+
+  = link_to_remote(t(:publish_all, :scope=> [:di, :lookups, :items]) + "!", :method => :put, :url => publish_all_admin_child_lookup_items_path(@lookup.id, nilz(@parent_id))) << " | "
+
   = link_to_inline(:create_lookup_item, new_admin_child_lookup_item_path(@lookup.id , nilz(@parent_id)), :text => t(:create, :scope=> [:di, :lookups, :items]))
 
 .title

@@ -20,9 +20,85 @@ class Admin::LookupItemsController < Admin::ApplicationController
     respond_to do |format|
       format.html # index.html.haml
       format.js   # index.js.rjs
-      format.xml  { render :xml => @ites }
+      format.xml  { render :xml => @lookup_items }
     end
 
+  end
+
+
+  #----------------------------------------------------------------------------
+  # PUT /admin/lookup_items/1/publish_all
+  # PUT /admin/lookup_items/1/publish_all.xml                              AJAX
+  #----------------------------------------------------------------------------
+  def publish_all
+
+    get_lookup_items params[:lookup_id], znil(params[:lookup_item_id])
+    
+    @lookup_items.each do |item|
+      item.activate! if item.unpublished?
+    end
+
+    respond_to do |format|
+      format.js   { render :action => :index }
+      format.xml  { render :xml => @lookup_items }
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    respond_to_not_found(:js, :xml)
+  end
+
+
+  #----------------------------------------------------------------------------
+  # PUT /admin/lookup_items/1/sort_a_z_description
+  # PUT /admin/lookup_items/1/sort_a_z_description.xml                     AJAX
+  #----------------------------------------------------------------------------
+  def sort_a_z_description
+
+    get_lookup_items params[:lookup_id], znil(params[:lookup_item_id])
+
+    @lookup_items.sort! { |a,b| a.description <=> b.description }
+    
+    i = 1
+    
+    @lookup_items.each do |item|
+      item.update_attribute(:sequence, i) unless item.sequence == i
+      i += 1
+    end
+
+    respond_to do |format|
+      format.js   { render :action => :index }
+      format.xml  { render :xml => @lookup_items }
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    respond_to_not_found(:js, :xml)
+  end
+
+
+  #----------------------------------------------------------------------------
+  # PUT /admin/lookup_items/1/sort_a_z_code
+  # PUT /admin/lookup_items/1/sort_a_z_code.xml                            AJAX
+  #----------------------------------------------------------------------------
+  def sort_a_z_code
+
+    get_lookup_items params[:lookup_id], znil(params[:lookup_item_id])
+
+    @lookup_items.sort! { |a,b| a.code <=> b.code }
+    
+    i = 1
+    
+    @lookup_items.each do |item|
+      item.update_attribute(:sequence, i) unless item.sequence == i
+      i += 1
+    end
+
+    respond_to do |format|
+      format.js   { render :action => :index }
+      format.xml  { render :xml => @lookup_items }
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    respond_to_not_found(:js, :xml)
   end
 
 

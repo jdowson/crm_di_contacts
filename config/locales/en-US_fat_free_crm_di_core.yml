@@ -37,7 +37,7 @@ en-US:
       title:                    Lookups
       lookup:                   Lookup
       details:                  Lookup Details
-      root:                     Root Lookups
+      root:                     All Top-Level Lookups
       create:                   Create Lookup
       create_child:             Create Child Lookup
       children:                 Child Lookups
@@ -60,7 +60,9 @@ en-US:
         save:                     Save Lookup Item
         child_items_small:        child items
         all_lookups:              all lookups
-        sort_a_z_description:     Sort A->Z        
+        sort_a_z_description:     Sort Description
+        sort_a_z_code:            Sort Code
+        publish_all:              Publish All
         for_parent:               for
         empty_description:        Empty Description
 
