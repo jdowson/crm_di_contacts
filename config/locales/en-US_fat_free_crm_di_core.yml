@@ -29,7 +29,6 @@ en-US:
     created_at_small:   created
     updated_at_small:   updated
 
-
     #----------------------------------------------------------------------------
     # Lookups.
     #----------------------------------------------------------------------------
@@ -56,11 +55,13 @@ en-US:
 
         # General Captions
         title:                    Lookup Items
-        lookup:                   Lookup Item
-        details:                  Lookup Item Details
         create:                   Create Lookup Item
         save:                     Save Lookup Item
-        items:                    Items
+        child_items_small:        child items
+        all_lookups:              all lookups
+        sort_a_z_description:     Sort A->Z        
+        for_parent:               for
+        empty_description:        Empty Description
 
         # Prompts
         confirm_delete:           Are you sure you want to delete this lookup item?

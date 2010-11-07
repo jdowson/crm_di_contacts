@@ -9,3 +9,11 @@ def sendd(f, s)
     puts "=" * 80
   end
 end  
+
+def znil(v)
+  v.to_s == "0" ? nil : v
+end
+
+def nilz(v)
+  v.nil? ? 0 : v
+end

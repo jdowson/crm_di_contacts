@@ -10,24 +10,25 @@
   .indent
     .tools{ invisible, :id => dom_id(lookup, :tools) }
 
-      - if lookup.parent_id.nil?
-        = link_to_items(lookup) << " | "
+      - unless defined? hide_child_count
 
-      = link_to_edit(lookup) << " | "
+        = link_to_edit(lookup) << " | "
 
-      - if lookup.active?
-        = link_to_unpublish(lookup) << " | "
+        = (link_to t(:children, :scope=> [:di, :lookups]), admin_lookup_path(lookup)) << " | "
 
-      - if lookup.unpublished?
-        = link_to_publish(lookup) << " | "
-        = link_to_inactivate(lookup) << " | "
+        - if lookup.active?
+          = link_to_unpublish(lookup) << " | "
 
-      - if lookup.inactive?
-        = link_to_activate(lookup) << " | "
+        - if lookup.unpublished?
+          = link_to_publish(lookup) << " | "
+          = link_to_inactivate(lookup) << " | "
 
-      = link_to_confirm(lookup)
+        - if lookup.inactive?
+          = link_to_activate(lookup) << " | "
 
-    %span.black #{link_to(h(lookup.name), admin_lookup_path(lookup))}
+        = link_to_confirm(lookup)
+
+    %span.black #{lookup.parent_id.nil? ? link_to(h(lookup.name), admin_lookup_items_path(lookup)) : h(lookup.name)}
     %tt
       = " - #{h(lookup.description)}" unless lookup.description.blank?
 

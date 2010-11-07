@@ -26,9 +26,16 @@
 
       = link_to_confirm(lookup_item)
 
-    %span.black #{link_to(h(lookup_item.description), admin_lookup_lookup_item_path(lookup_item.lookup_id, lookup_item))}
+    %span.black 
+    %b #{lookup_item.description.blank? ? "<i>[#{t :empty_description, :scope=> [:di, :lookups, :items]}]</i>" : h(lookup_item.description)}
     %tt
-      = " - #{h(lookup_item.code)}" unless lookup_item.description.blank?
+      = " - #{h(lookup_item.code)}"
+
+    - unless lookup_item.lookup.lookups.empty?
+      %br
+      %tt
+        #{t :child_items_small, :scope=> [:di, :lookups, :items]}: 
+        = render :partial => "lookup_item_child_lookup", :collection => lookup_item.lookup.lookups, :locals => { :parent_id => lookup_item.id }
 
     %dt{ :style => "padding: 2px 0px 0px 0px" }
       = "#{h(lookup_item.long_description)} | " unless lookup_item.long_description.blank?

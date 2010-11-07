@@ -1,0 +1,2 @@
+= " | " unless lookup_item_child_lookup_counter == 0
+= "#{link_to(lookup_item_child_lookup.name, admin_child_lookup_items_path(lookup_item_child_lookup.id, parent_id))} (#{lookup_item_child_lookup.items_for_parent(parent_id).length})" 

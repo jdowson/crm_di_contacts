@@ -3,42 +3,9 @@ class Admin::LookupItemsController < Admin::ApplicationController
 
   unloadable
 
-  before_filter :set_current_tab, :only => [ :index, :show ]
+  before_filter "set_current_tab('lookups')", :only => [ :index, :show ]
   before_filter :auto_complete, :only => :auto_complete 
 
-  
-#   # Store current selection when using simple column search
-#   #----------------------------------------------------------------------------
-#   def current_selection=(selection)
-#     @current_selection = session["#{controller_name}_current_selection".to_sym] = selection.to_i
-#   end
-# 
-#   #----------------------------------------------------------------------------
-#   def current_selection
-#     selection = params[:id] || session["#{controller_name}_current_selection".to_sym] || 0
-#     @current_selection = selection.to_i
-#   end
-
-
-#   #----------------------------------------------------------------------------
-#   # GET /admin/lookups/1
-#   # GET /admin/lookups/1.xml
-#   #----------------------------------------------------------------------------
-#   def show
-# 
-#     self.current_query = ''
-#     
-#     @lookup  = Lookup.find(params[:id])
-#     @lookups = get_child_lookups(@lookup, :page => params[:page])
-# 
-#     respond_to do |format|
-#       format.html # show.html.haml
-#       format.xml  { render :xml => @lookup }
-#     end
-# 
-#   rescue ActiveRecord::RecordNotFound
-#     respond_to_not_found(:html, :xml)
-#   end
 
   #----------------------------------------------------------------------------
   # GET /admin/lookup_items
@@ -48,7 +15,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
 
     self.current_query = ''
 
-    @lookup_items = get_lookup_items_all(:page => params[:page])
+    get_lookup_items params[:lookup_id], znil(params[:lookup_item_id]), :page => params[:page]
 
     respond_to do |format|
       format.html # index.html.haml
@@ -104,20 +71,15 @@ class Admin::LookupItemsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def new
 
- #   if(params[:id] && !params[:id].empty?)
- #     @lookup = LookupItem.find(params[:id]).lookups.new
- #   else
-      @lookup_item = LookupItem.new
-      @lookup_item.lookup_id = 1
- #   end
+    @lookup_item = LookupItem.new
+    @lookup_item.lookup_id = params[:lookup_id]
+    @lookup_item.parent_id = znil(params[:lookup_item_id])
 
     respond_to do |format|
       format.js   # new.js.rjs
       format.xml  { render :xml => @lookup }
     end
 
-#  rescue ActiveRecord::RecordNotFound
-#    respond_to_not_found(:js, :xml)
   end
 
 
@@ -128,13 +90,11 @@ class Admin::LookupItemsController < Admin::ApplicationController
   def create
     @lookup_item = LookupItem.new(params[:lookup_item])
     @lookup_item.assign_next_sequence
-#page.insert_html :bottom, :lookup_items, :partial => "lookup_item", :collection => [ @lookup_item ]
-    
     
     respond_to do |format|
       if @lookup_item.save
-        @lookup_items = get_lookup_items(@lookup_item.siblings, :page => params[:page])
-        #FROM OLD PARTIAL @lookups = @lookup.parent.nil? ? get_root_lookups : get_child_lookups(@lookup.parent)
+        get_lookup_item_siblings @lookup_item, :page => params[:page]
+
         format.js   # create.js.rjs
         format.xml  { render :xml => @lookup, :status => :created, :location => @lookup_item }
       else
@@ -232,6 +192,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
 
     respond_to do |format|
       if @lookup_item.destroy
+        get_lookup_item_siblings @lookup_item, :page => params[:page]
         format.js   # destroy.js.rjs
         format.xml  { head :ok }
       else
@@ -251,7 +212,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
     @lookup_item = LookupItem.find(params[:id])
     @lookup_item.move_up!
     
-    @lookup_items = get_lookup_items @lookup_item.siblings
+    get_lookup_item_siblings @lookup_item, :page => params[:page]
     
     respond_to do |format|
       format.js   { render :action => :index }
@@ -271,7 +232,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
     @lookup_item = LookupItem.find(params[:id])
     @lookup_item.move_down!
     
-    @lookup_items = get_lookup_items @lookup_item.siblings
+    get_lookup_item_siblings @lookup_item, :page => params[:page]
     
     respond_to do |format|
       format.js   { render :action => :index }
@@ -282,81 +243,30 @@ class Admin::LookupItemsController < Admin::ApplicationController
     respond_to_not_found(:js, :xml)
   end
 
-  
-#   #----------------------------------------------------------------------------
-#   # GET /admin/users/search/query                                          AJAX
-#   #----------------------------------------------------------------------------
-#   def search
-# 
-#     if(self.current_selection == 0)
-#       @lookups = get_root_lookups(:query => params[:query], :page => 1)
-#     else
-#       @lookup  = Lookup.find(self.current_selection)
-#       @lookups = get_child_lookups(@lookup, :query => params[:query], :page => 1)
-#     end
-#     
-#     respond_to do |format|
-#       format.js   { render :action => :index }
-#       format.xml  { render :xml => @lookups.to_xml }
-#     end
-# 
-#   rescue ActiveRecord::RecordNotFound
-#     respond_to_not_found(:js, :xml)
-#   end
 
-  
   private
 
-#   #----------------------------------------------------------------------------
-#   def get_lookups(selection, options = { :page => nil, :query => nil })
-# 
-#     self.current_page      = options[:page]  if options[:page]
-#     self.current_query     = options[:query] if options[:query]
-# 
-#     if current_query.blank?
-#       selection.paginate(:page => current_page)
-#     else
-#       selection.search(current_query).paginate(:page => current_page)
-#     end
-# 
-#   end
-#     
-#   #----------------------------------------------------------------------------
-#   def get_root_lookups(options = { :page => nil, :query => nil })
-#     self.current_selection = 0
-#     get_lookups Lookup.root_lookups, options
-#   end
-# 
-#   #----------------------------------------------------------------------------
-#   def get_child_lookups(parent, options = { :page => nil, :query => nil })
-#     self.current_selection = parent.id
-#     get_lookups parent.lookups, options
-#   end
-
-  def get_lookup_items_all(options = { :page => nil, :query => nil })
+  def get_lookup_items(lookup_id, parent_id, options = { :page => nil, :query => nil })
 
     self.current_page      = options[:page]  if options[:page]
     self.current_query     = options[:query] if options[:query]
 
-    if current_query.blank?
-      LookupItem.all.paginate(:page => current_page)
-    else
-      LookupItem.all.search(current_query).paginate(:page => current_page)
-    end
+    @lookup_id = lookup_id
+    @lookup = Lookup.find(@lookup_id)
 
+    @parent_id = parent_id
+    @parent = @parent_id.nil? ? nil : LookupItem.find(@parent_id)
+    
+    if current_query.blank?
+      @lookup_items = @lookup.items_for_parent(@parent_id).paginate(:page => current_page)
+    else
+      @lookup_items = @lookup.items_for_parent(@parent_id).search(current_query).paginate(:page => current_page)
+    end
+  
   end
 
-  def get_lookup_items(lookup_items, options = { :page => nil, :query => nil })
-
-    self.current_page      = options[:page]  if options[:page]
-    self.current_query     = options[:query] if options[:query]
-
-    if current_query.blank?
-      lookup_items.paginate(:page => current_page)
-    else
-      lookup_items.search(current_query).paginate(:page => current_page)
-    end
-
+  def get_lookup_item_siblings(lookup_item, options = { :page => nil, :query => nil })
+    get_lookup_items lookup_item.lookup_id, lookup_item.parent_id, options
   end
-
+  
 end 

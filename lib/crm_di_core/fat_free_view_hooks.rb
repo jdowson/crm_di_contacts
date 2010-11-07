@@ -25,15 +25,24 @@ li.lookup .unpublished
     :background lightblue
 li.lookup .inactive
     :background gainsboro
-EOS
-
-  INLINE_STYLES_LOOKUP_ITEMS = <<EOS
 li.lookup_item .active
     :background lightgreen
 li.lookup_item .unpublished
     :background lightblue
 li.lookup_item .inactive
     :background gainsboro
+div .discope
+    :background antiquewhite
+    :margin 4px
+    :padding 4px
+    :border 1px solid darkgray
+    :font-size 0.8em
+div .discopeside
+    :background antiquewhite
+    :margin 2px
+    :padding 4px
+    :border 1px solid darkgray
+    :font-size 1.0em
 EOS
 
   # Install inline style hook
@@ -42,7 +51,7 @@ EOS
     if(view.controller.action_name == 'index' || view.controller.action_name == 'show')
       styles = case view.controller.controller_name
         when "lookups"      then INLINE_STYLES_LOOKUPS
-        when "lookup_items" then INLINE_STYLES_LOOKUP_ITEMS
+        when "lookup_items" then INLINE_STYLES_LOOKUPS
         else ""
       end
     end

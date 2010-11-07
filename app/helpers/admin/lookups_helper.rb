@@ -2,11 +2,6 @@
 module Admin::LookupsHelper
 
   #----------------------------------------------------------------------------
-  def link_to_items(lookup)
-    link_to(t(:items, :scope=> [:di, :lookups, :items]), admin_lookup_lookup_items_path(lookup))
-  end
-
-  #----------------------------------------------------------------------------
   def link_to_confirm(lookup)
     link_to_remote(t(:delete, :scope=> [:di]) + "?", :method => :get, :url => confirm_admin_lookup_path(lookup))
   end

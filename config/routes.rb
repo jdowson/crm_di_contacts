@@ -4,7 +4,11 @@ ActionController::Routing::Routes.draw do |map|
 
     admin.resources :lookups, :collection => { :search => :get, :auto_complete => :post }, :member => { :unpublish => :put, :publish => :put, :inactivate => :put, :activate => :put, :confirm => :get }  do |lookup|
 
-      lookup.resources :lookup_items, :as => "items", :collection => { :search => :get, :auto_complete => :post }, :member => { :unpublish => :put, :publish => :put, :inactivate => :put, :activate => :put, :confirm => :get,   :moveup => :put, :movedown => :put }
+      lookup.resources :lookup_items, :name_prefix => "admin_", :as => "items", :collection => { :search => :get, :auto_complete => :post }, :member => { :unpublish => :put, :publish => :put, :inactivate => :put, :activate => :put, :confirm => :get,   :moveup => :put, :movedown => :put }, :requirements => { :lookup_item_id => nil } do |item|
+
+        item.resources :lookup_items, :name_prefix => "admin_child_", :as => "children", :collection => { :search => :get, :auto_complete => :post }, :member => { :unpublish => :put, :publish => :put, :inactivate => :put, :activate => :put, :confirm => :get,   :moveup => :put, :movedown => :put }
+	  
+      end
 
     end
     
