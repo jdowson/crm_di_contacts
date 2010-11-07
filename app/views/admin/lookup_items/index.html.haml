@@ -7,10 +7,10 @@
   %span#create_lookup_item_title #{t :title, :scope=> [:di, :lookups, :items]}
   %br
   .discope 
-    #{@lookup.name}
+    #{h(@lookup.name)}
     - unless @parent.nil?
       %br
-      %i= "#{t(:for_parent, :scope=> [:di, :lookups, :items])} #{@parent.lookup.name}: #{@parent.description} (#{@parent.code})" unless @parent.nil?
+      %i= "#{t(:for_parent, :scope=> [:di, :lookups, :items])} #{h(@parent.lookup.name)}: #{html_description(@parent)} (#{h(@parent.code)})" unless @parent.nil?
 
   = image_tag("loading.gif", :size => "16x16", :id => "loading", :style => "display: none;")
 .remote#create_lookup_item{ hidden }

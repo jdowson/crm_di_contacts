@@ -14,7 +14,7 @@
 
         = link_to_edit(lookup) << " | "
 
-        = (link_to t(:children, :scope=> [:di, :lookups]), admin_lookup_path(lookup)) << " | "
+        = (link_to t(:children, :scope=> [:di, :lookups]), admin_child_lookups_path(lookup)) << " | "
 
         - if lookup.active?
           = link_to_unpublish(lookup) << " | "
@@ -28,7 +28,8 @@
 
         = link_to_confirm(lookup)
 
-    %span.black #{lookup.parent_id.nil? ? link_to(h(lookup.name), admin_lookup_items_path(lookup)) : h(lookup.name)}
+    %span.black
+      #{lookup.parent_id.nil? ? link_to(h(lookup.name), admin_lookup_items_path(lookup)) : h(lookup.name)}
     %tt
       = " - #{h(lookup.description)}" unless lookup.description.blank?
 

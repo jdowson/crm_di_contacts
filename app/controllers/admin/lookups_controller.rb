@@ -21,27 +21,6 @@ class Admin::LookupsController < Admin::ApplicationController
 
 
   #----------------------------------------------------------------------------
-  # GET /admin/lookups/1
-  # GET /admin/lookups/1.xml
-  #----------------------------------------------------------------------------
-  def show
-
-    self.current_query = ''
-    
-    @lookup  = Lookup.find(params[:id])
-    @lookups = get_child_lookups(@lookup, :page => params[:page])
-
-    respond_to do |format|
-      format.html # show.html.haml
-      format.xml  { render :xml => @lookup }
-    end
-
-  rescue ActiveRecord::RecordNotFound
-    respond_to_not_found(:html, :xml)
-  end
-
-  
-  #----------------------------------------------------------------------------
   # GET /admin/lookups
   # GET /admin/lookups.xml                                                 HTML
   #----------------------------------------------------------------------------
@@ -49,7 +28,9 @@ class Admin::LookupsController < Admin::ApplicationController
 
     self.current_query = ''
     
-    @lookups = get_root_lookups(:page => params[:page])
+    @lookup_id = znil(params[:lookup_id])
+    @lookup  = @lookup_id.nil? ? nil : Lookup.find(@lookup_id)
+    @lookups = @lookup.nil? ? get_root_lookups(:page => params[:page]) : get_child_lookups(@lookup, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.haml
@@ -105,11 +86,8 @@ class Admin::LookupsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def new
 
-    if(params[:id] && !params[:id].empty?)
-      @lookup = Lookup.find(params[:id]).lookups.new
-    else
-      @lookup = Lookup.new
-    end
+    @lookup_id = znil(params[:lookup_id])
+    @lookup = @lookup_id.nil? ? Lookup.new : Lookup.find(@lookup_id).lookups.new
 
     respond_to do |format|
       format.js   # new.js.rjs
@@ -241,12 +219,9 @@ class Admin::LookupsController < Admin::ApplicationController
   #----------------------------------------------------------------------------
   def search
 
-    if(self.current_selection == 0)
-      @lookups = get_root_lookups(:query => params[:query], :page => 1)
-    else
-      @lookup  = Lookup.find(self.current_selection)
-      @lookups = get_child_lookups(@lookup, :query => params[:query], :page => 1)
-    end
+    @lookup_id = znil(current_selection)
+    @lookup  = @lookup_id.nil? ? nil : Lookup.find(@lookup_id)
+    @lookups = @lookup.nil? ? get_root_lookups(:page => params[:page]) : get_child_lookups(@lookup, :page => params[:page])
     
     respond_to do |format|
       format.js   { render :action => :index }

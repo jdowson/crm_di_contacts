@@ -32,10 +32,10 @@ module Admin::LookupsHelper
     s = ""
 
     until p.nil?
-      s = link_to(h(p.name), admin_lookup_path(p)) << (s.empty? ? "" : " | ") << s
+      s = link_to(h(p.name), admin_child_lookups_path(p)) << (s.empty? ? "" : " | ") << s
       p = p.parent
     end
-    
+
     s
   end
   

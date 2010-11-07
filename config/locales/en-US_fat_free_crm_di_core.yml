@@ -43,7 +43,8 @@ en-US:
       children:                 Child Lookups
       child_count_small:        child lookups
       save_lookup:              Save Lookup
-      parent_lookups:           Parent Path
+      parent_lookups:           Lookup Path
+      for_parent:               for
 
       name:                     Lookup Name
       description:              Description

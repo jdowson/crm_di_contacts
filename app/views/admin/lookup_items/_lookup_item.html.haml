@@ -27,7 +27,7 @@
       = link_to_confirm(lookup_item)
 
     %span.black 
-    %b #{lookup_item.description.blank? ? "<i>[#{t :empty_description, :scope=> [:di, :lookups, :items]}]</i>" : h(lookup_item.description)}
+    #{html_description(lookup_item)}
     %tt
       = " - #{h(lookup_item.code)}"
 

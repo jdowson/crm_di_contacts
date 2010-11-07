@@ -1,5 +1,17 @@
 .panel#summary
-  %h4= t(:root, :scope => [:di, :lookups])
+  .caption #{t :title, :scope => [:di, :lookups]}
+
+  %br
+  .discopeside
+    %b= link_to(t(:all_lookups, :scope => [:di, :lookups, :items]), admin_lookups_path)
+  = "&nbsp;&nbsp;&nbsp;&nbsp;&dArr;" unless @lookup.nil?
+  %br
+
+  - unless @lookup.nil? || @lookup.parent.nil?
+    = render :partial => "sidebar_index_parent", :object => @lookup.parent
+
+  %b= @lookup.name unless @lookup.nil?
+
 
 .filters#filters
   = render :partial => "common/search"

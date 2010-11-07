@@ -3,6 +3,6 @@
 .discopeside
   %b= link_to(sidebar_index_parent.lookup.name, admin_child_lookup_items_path(:lookup_id => sidebar_index_parent.lookup_id, :lookup_item_id => nilz(sidebar_index_parent.parent_id)))
   %br
-  = "#{sidebar_index_parent.description} (#{sidebar_index_parent.code})"
+  = "#{html_description(sidebar_index_parent)} (#{sidebar_index_parent.code})"
 &nbsp;&nbsp;&nbsp;&nbsp;&dArr;
 %br

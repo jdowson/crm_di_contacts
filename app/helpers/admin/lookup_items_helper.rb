@@ -2,6 +2,11 @@
 module Admin::LookupItemsHelper
 
   #----------------------------------------------------------------------------
+  def html_description(lookup_item)
+    lookup_item.description.blank? ? "<i>[#{t :empty_description, :scope=> [:di, :lookups, :items]}]</i>" : h(lookup_item.description)
+  end
+  
+  #----------------------------------------------------------------------------
   def link_to_edit(lookup_item)
     link_to_remote(t(:edit), :method => :get, :url => edit_admin_child_lookup_item_path(lookup_item.lookup_id, nilz(lookup_item.parent_id), lookup_item))
   end
