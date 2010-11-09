@@ -23,7 +23,13 @@ en-US:
     delete:             Delete
     show_all:           Show All
 
+
     audit_information:  Audit Information
+    audit_intro:        ""
+
+    locales:            Locales
+    locales_intro:      Use this section to set international versions of lookup items
+
     created_at:         Created
     updated_at:         Updated
     created_at_small:   created

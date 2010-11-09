@@ -18,16 +18,20 @@
 class LookupItem < ActiveRecord::Base
 
   # Attributes accessible from outside the model
-  attr_accessible    :lookup_id, :sequence, :parent_id, :code, :language, 
-                     :description, :long_description, :html_color, :item_type, :status
+  attr_accessible       :lookup_id, :sequence, :parent_id, :code, :language, 
+                        :description, :long_description, :html_color, :item_type, :status
 
   # Model Callbacks
-  before_destroy     :check_if_has_children
+  before_destroy       :check_if_has_children
   
   # Relationships
-  has_many   :items, :foreign_key => 'parent_id',
-                     :class_name  => 'LookupItem'
-                     # ,:dependent   => :destroy
+  has_many   :items,   :foreign_key => 'parent_id',
+                       :class_name  => 'LookupItem'
+                       # ,:dependent   => :destroy
+  
+  has_many   :locales, :foreign_key => 'lookup_item_id',
+                       :class_name  => 'LookupItemLocale'
+                       # ,:dependent   => :destroy
   
   belongs_to :lookup
 
@@ -48,6 +52,12 @@ class LookupItem < ActiveRecord::Base
   validates_length_of     :description,      :maximum => 255, :allow_blank => true
   validates_length_of     :long_description, :maximum => 255, :allow_blank => true
   validates_length_of     :html_color,       :maximum => 50,  :allow_blank => true
+
+  # Provide seq accessor to fix Factory Girl
+  #----------------------------------------------------------------------------
+  def seq=(i)
+    write_attribute(:sequence, i)
+  end
 
   # Override lookup_id accessor to set unique_code
   #----------------------------------------------------------------------------

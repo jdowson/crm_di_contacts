@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  lookup_item_id: 1
+  language: MyString
+  description: MyString
+  long_description: MyString
+
+two:
+  lookup_item_id: 1
+  language: MyString
+  description: MyString
+  long_description: MyString

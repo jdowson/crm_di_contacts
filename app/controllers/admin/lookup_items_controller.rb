@@ -124,10 +124,11 @@ class Admin::LookupItemsController < Admin::ApplicationController
   # PUT /admin/lookup_items/1.xml                                          AJAX
   #----------------------------------------------------------------------------
   def update
+
     @lookup_item = LookupItem.find(params[:id])
- 
+
     respond_to do |format|
-      if @lookup_item.update_attributes(params[:lookup_item])
+      if @lookup_item.update_attributes(params[:lookup_item]) && save_locales(@lookup_item)
         format.js   # update.js.rjs
         format.xml  { head :ok }
       else
@@ -140,6 +141,35 @@ class Admin::LookupItemsController < Admin::ApplicationController
     respond_to_not_found(:js, :xml)
   end
 
+  def save_locales(lookup_item)
+
+    saveok = true
+    
+    [
+      params[:locale_languages], 
+      params[:locale_descriptions], 
+      params[:locale_long_descriptions]
+    ].transpose.each do |l|
+
+      language = l[0]
+
+      if params[:locales] && params[:locales].include?(language)
+        if lookup_item.locales.map(&:language).include?(language)
+          saveok &&= lookup_item.locales.find_by_language(language).update_attributes(:description => l[1], :long_description => l[2])
+        else
+          saveok &&= lookup_item.locales.new(:language => language, :description => l[1], :long_description => l[2]).save
+        end
+      else
+        if lookup_item.locales.map(&:language).include?(language)
+          saveok &&= lookup_item.locales.find_by_language(language).destroy
+        end
+      end
+      
+    end
+    
+    saveok
+    
+  end
   
   #----------------------------------------------------------------------------
   # GET /admin/lookup_items/new
@@ -168,7 +198,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
     @lookup_item.assign_next_sequence
     
     respond_to do |format|
-      if @lookup_item.save
+      if @lookup_item.save && save_locales(@lookup_item)
         get_lookup_item_siblings @lookup_item, :page => params[:page]
 
         format.js   # create.js.rjs

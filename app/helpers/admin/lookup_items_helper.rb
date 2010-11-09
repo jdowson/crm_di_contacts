@@ -2,6 +2,11 @@
 module Admin::LookupItemsHelper
 
   #----------------------------------------------------------------------------
+  def cbx_locale_handler(locale)
+    "$('locale_long_description_#{locale}').disabled=!this.checked"
+  end
+  
+  #----------------------------------------------------------------------------
   def html_description(lookup_item)
     lookup_item.description.blank? ? "<i>[#{t :empty_description, :scope=> [:di, :lookups, :items]}]</i>" : h(lookup_item.description)
   end

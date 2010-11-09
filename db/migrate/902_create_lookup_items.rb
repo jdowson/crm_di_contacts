@@ -16,9 +16,9 @@ class CreateLookupItems < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :lookup_items, [:lookup_id, :parent_id], :unique => false, :name => 'ixu_lookup_items_lookup_parent'    
-    add_index :lookup_items, [:lookup_id, :parent_id, :code], :unique => true, :name => 'ixu_lookup_items_lookup_parent_code'    
-    add_index :lookup_items, :unique_code, :unique => true, :name => 'ixu_lookup_items_unique_code'
+    add_index :lookup_items, [:lookup_id, :parent_id], :unique => false, :name => 'ix_lookup_items_lookup_parent'    
+    add_index :lookup_items, [:lookup_id, :parent_id, :code, :deleted_at], :unique => true, :name => 'ixu_lookup_items_lookup_parent_code'    
+    add_index :lookup_items, [:unique_code, :deleted_at] :unique => true, :name => 'ixu_lookup_items_unique_code'
     
   end
 

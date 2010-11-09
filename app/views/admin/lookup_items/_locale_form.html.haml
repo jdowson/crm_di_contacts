@@ -1,0 +1,37 @@
+- unless locale_form == I18n.default_locale
+
+  - locale_name = locale_form.to_s
+  - item_locale = lookup_item.locales.find_by_language(locale_name)
+  - active      = !item_locale.nil?
+  - description = item_locale.nil? ? "" : item_locale.description
+  - longdesc    = item_locale.nil? ? "" : item_locale.long_description
+  -# @account.permissions.map(&:user_id).include?(user.id) || (params[:users] && params[:users].include?(user.id.to_s))
+
+  = hidden_field_tag "locale_languages[]", locale_name, { :id => "locale_language_#{locale_name}" }
+
+  %table(width="500" cellpadding="0" cellspacing="0")
+
+    %tr
+      %td(colspan="3" style="padding-top:5px")
+
+    %tr
+
+      %td(valign="top" width="245px")
+        .check_box
+          = check_box_tag "locales[]", locale_name, active, { :id => "locale_#{locale_name}", :onclick => cbx_locale_handler(locale_name) }
+          = label_tag "locale_#{locale_name}", "<b>#{h("#{t :language, :locale => locale_name.to_s, :default => "Languge #{locale_name}" } (#{ h(locale_name) })")}</b>", :style => "cursor:pointer"
+          %br
+          = label_tag "locale_long_description_#{locale_name}", "<small>#{h(t :long_description, :scope => [:di, :lookups, :items])}:</small>"
+
+      %td= spacer
+
+      %td(valign="top")
+
+        = label_tag "locale_description_#{locale_name}", "<small>#{h(t :description, :scope => [:di, :lookups, :items])}:</small>"
+        = text_field_tag "locale_descriptions[]", description, { :id => "locale_description_#{locale_name}", :maxlength => 255, :style => "width:240px" }
+
+    %tr
+
+      %td(colspan="3" valign="top" style="border-bottom: 1px solid gray; padding-bottom: 10px;")
+        = text_field_tag "locale_long_descriptions[]", longdesc, { :id => "locale_long_description_#{locale_name}", :maxlength => 255, :style => "width:495px" }
+ 
