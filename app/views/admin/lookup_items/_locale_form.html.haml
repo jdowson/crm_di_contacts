@@ -13,7 +13,7 @@
 
     .check_box
       = check_box_tag "locales[]", locale_name, active, { :id => "locale_#{locale_name}", :onclick => cbx_locale_handler(locale_name) }
-      = label_tag "locale_#{locale_name}", "<b>#{h("#{t :language, :locale => locale_name.to_s, :default => "Languge #{locale_name}" } (#{ h(locale_name) })")}</b>", :style => "cursor:pointer"
+      = label_tag "locale_#{locale_name}", "<b>#{h("#{t :language, :locale => locale_name.to_s, :default => "#{h(t :language, :scope => [:di, :lookups, :items])} '#{locale_name}'" } (#{ h(locale_name) })")}</b>", :style => "cursor:pointer"
 
       %div{:id => "localeform_#{locale_name}", :style => "display:#{active ? "block" : "none"};" }
 

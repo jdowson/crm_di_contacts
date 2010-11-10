@@ -180,7 +180,7 @@ class Admin::LookupItemsController < Admin::ApplicationController
     @lookup_item = LookupItem.new
     @lookup_item.lookup_id = params[:lookup_id]
     @lookup_item.parent_id = znil(params[:lookup_item_id])
-
+    
     respond_to do |format|
       format.js   # new.js.rjs
       format.xml  { render :xml => @lookup }

@@ -82,4 +82,4 @@ en-US:
         long_description:         Long Description
         item_type:                Type
         html_color:               HTML Color
-        language:                 Language ID
+        language:                 Language code

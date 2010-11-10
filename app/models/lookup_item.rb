@@ -23,6 +23,7 @@ class LookupItem < ActiveRecord::Base
 
   # Model Callbacks
   before_destroy       :check_if_has_children
+  before_create        :set_defaults_create
   
   # Relationships
   has_many   :items,   :foreign_key => 'parent_id',
@@ -202,11 +203,16 @@ class LookupItem < ActiveRecord::Base
 
   private
   
-
   # Prevent deleting a lookup if it has child lookups
   #----------------------------------------------------------------------------
   def check_if_has_children
     self.items.count == 0
+  end
+  
+  # Set new record defaults
+  #----------------------------------------------------------------------------
+  def set_defaults_create
+     self.language = I18n.default_locale.to_s
   end
   
 end
