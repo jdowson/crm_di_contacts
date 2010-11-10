@@ -6,7 +6,8 @@ module CrmDICore
   module FFViewHelpers
 
     def side_bar_item(c, s)
-      "#{c}: <b>#{s}</b>"
+      DILookupCache.load unless DILookupCache.loaded?
+      "#{c}: <b style='color:#{DILookupCache.l_itemcolor("color", s)}'>#{DILookupCache.l_itemldesc("color", s)}</b>"
     end
 
   end

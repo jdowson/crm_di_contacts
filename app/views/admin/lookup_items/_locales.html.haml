@@ -1,9 +1,9 @@
 - collapsed = true
-= subtitle :locales, collapsed, t(:locales, :scope => [:di] ) 
+= subtitle :locales, collapsed, t(:locales, :scope => [:di, :lookups, :items] ) 
 .section
 
   %small#locales_intro{ hidden_if(!collapsed) }
-    = t(:locales_intro, :scope => [:di] ) ##unless edit
+    = t(:locales_intro, :scope => [:di, :lookups, :items] ) ##unless edit
 
   #locales{ hidden_if(collapsed) }
     %div

@@ -51,12 +51,14 @@ en-US:
       save_lookup:              Save Lookup
       parent_lookups:           Lookup Path
       for_parent:               for
+      cacheupdate:              Update Cache
 
       name:                     Lookup Name
       description:              Description
 
       confirm_delete:           Are you sure you want to delete this lookup?
       msg_cant_delete:          "^Couldn't delete the %{value} lookup as it has child lookups."
+      msg_cache_updated:        "The application lookup cache has been updated."
 
       items:
 
@@ -71,6 +73,8 @@ en-US:
         publish_all:              Publish All
         for_parent:               for
         empty_description:        Empty Description
+        locales:                  Locales
+        locales_intro:            Use this section to set international versions of lookup items
 
         # Prompts
         confirm_delete:           Are you sure you want to delete this lookup item?

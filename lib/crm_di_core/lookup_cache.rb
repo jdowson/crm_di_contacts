@@ -87,12 +87,44 @@ class DILookupCache
   def self.u_itemdesc(lookup_name, code, parent_id = nil)
     if i = self.item(lookup_name, code, parent_id)
       i[:description]
+    else
+      code
     end
   end
   
   def self.l_itemdesc(lookup_name, code, parent_id = nil, locale = nil)
     if i = localized_item(self.item(lookup_name, code, parent_id), locale ||= I18n.locale  ||= I18n.default_locale)
       i[:description]
+    else
+      code
+    end
+  end
+ 
+  def self.u_itemldesc(lookup_name, code, parent_id = nil)
+    if i = self.item(lookup_name, code, parent_id)
+      i[:long_desc]
+    else
+      code
+    end
+  end
+  
+  def self.l_itemldesc(lookup_name, code, parent_id = nil, locale = nil)
+    if i = localized_item(self.item(lookup_name, code, parent_id), locale ||= I18n.locale  ||= I18n.default_locale)
+      i[:long_desc]
+    else
+      code
+    end
+  end
+ 
+  def self.u_itemcolor(lookup_name, code, parent_id = nil)
+    if i = self.item(lookup_name, code, parent_id)
+      i[:color]
+    end
+  end
+  
+  def self.l_itemcolor(lookup_name, code, parent_id = nil, locale = nil)
+    if i = localized_item(self.item(lookup_name, code, parent_id), locale ||= I18n.locale  ||= I18n.default_locale)
+      i[:color]
     end
   end
  
@@ -115,6 +147,20 @@ class DILookupCache
   def self.l_items(lookup_name, parent_id = nil, locale = nil)
     if a = self.items(lookup_name, parent_id)
       a.map { |i| localized_item(i, locale ||= I18n.locale  ||= I18n.default_locale) }
+    end
+  end
+
+  def self.u_options(lookup_name, parent_id = nil, code = :code, description = :description)
+    if a = self.u_items(lookup_name, parent_id)
+      #a.map { |i| i[:color].empty? ? [ i[description], i[code] ] : [ i[description], i[code], {:style => "color:#{i[:color]}"} ]}
+      a.map { |i| [ i[description], i[code] ] }
+    end
+  end
+  
+  def self.l_options(lookup_name, parent_id = nil, code = :code, description = :description, locale = nil)
+    if a = self.l_items(lookup_name, parent_id, locale)
+      #a.map { |i| i[:color].empty? ? [ i[description], i[code] ] : [ i[description], i[code], {:style => "color:#{i[:color]}"} ]}
+      a.map { |i| [ i[description], i[code] ] }
     end
   end
 

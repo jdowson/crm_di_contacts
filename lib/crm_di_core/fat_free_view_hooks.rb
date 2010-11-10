@@ -10,10 +10,13 @@ class DICoreFFViewHooks < FatFreeCRM::Callback::Base
 %tr
   %td{ :valign => :top, :colspan => span }
     .label.req Mongness: <small>(how much of a mong?)</small>
-    = f.text_field :mongness, :style => "width:200px"
+    - DILookupCache.load unless DILookupCache.loaded?
+    = f.select :mongness, options_for_select(DILookupCache.l_options("color"), @contact.mongness), { :include_blank => false }, { :style => "width:240px" }
+
 EOS
-
-
+#collection_select(:post, :category_id, Category.all, :id, :name)
+#    = f.text_field :mongness, :style => "width:200px"
+#options_from_collection_for_select(Lookup.all, 'id', 'name', @contact.mongness)
   HAML_MONGNESSSIDEBAR = <<EOS
 .mongnessItem= side_bar_item("Mongness", model.mongness)
 EOS
