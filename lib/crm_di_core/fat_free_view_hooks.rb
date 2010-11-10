@@ -31,6 +31,13 @@ li.lookup_item .unpublished
     :background lightblue
 li.lookup_item .inactive
     :background gainsboro
+div .disubform
+    :background gainsboro
+    :margin-bottom 4px
+    :margin-top 4px
+    :padding-left 4px
+    :padding-right 4px
+    :border 1px solid darkgray
 div .discope
     :background antiquewhite
     :margin 4px

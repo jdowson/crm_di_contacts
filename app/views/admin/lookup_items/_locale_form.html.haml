@@ -9,29 +9,25 @@
 
   = hidden_field_tag "locale_languages[]", locale_name, { :id => "locale_language_#{locale_name}" }
 
-  %table(width="500" cellpadding="0" cellspacing="0")
+  .disubform{ :style => "width:492px;" }
 
-    %tr
-      %td(colspan="3" style="padding-top:5px")
+    .check_box
+      = check_box_tag "locales[]", locale_name, active, { :id => "locale_#{locale_name}", :onclick => cbx_locale_handler(locale_name) }
+      = label_tag "locale_#{locale_name}", "<b>#{h("#{t :language, :locale => locale_name.to_s, :default => "Languge #{locale_name}" } (#{ h(locale_name) })")}</b>", :style => "cursor:pointer"
 
-    %tr
+      %div{:id => "localeform_#{locale_name}", :style => "display:#{active ? "block" : "none"};" }
 
-      %td(valign="top" width="245px")
-        .check_box
-          = check_box_tag "locales[]", locale_name, active, { :id => "locale_#{locale_name}", :onclick => cbx_locale_handler(locale_name) }
-          = label_tag "locale_#{locale_name}", "<b>#{h("#{t :language, :locale => locale_name.to_s, :default => "Languge #{locale_name}" } (#{ h(locale_name) })")}</b>", :style => "cursor:pointer"
-          %br
-          = label_tag "locale_long_description_#{locale_name}", "<small>#{h(t :long_description, :scope => [:di, :lookups, :items])}:</small>"
+        %table{ :border => 0, :cellpadding => 0, :cellspacing => 0 }
+          %tr
+            %td
+              = label_tag "locale_description_#{locale_name}", "<small>#{h(t :description, :scope => [:di, :lookups, :items])}:</small>"
+            %td= spacer
+            %td
+              = text_field_tag "locale_descriptions[]", description, { :id => "locale_description_#{locale_name}", :maxlength => 255, :style => "width:240px;" }
 
-      %td= spacer
-
-      %td(valign="top")
-
-        = label_tag "locale_description_#{locale_name}", "<small>#{h(t :description, :scope => [:di, :lookups, :items])}:</small>"
-        = text_field_tag "locale_descriptions[]", description, { :id => "locale_description_#{locale_name}", :maxlength => 255, :style => "width:240px" }
-
-    %tr
-
-      %td(colspan="3" valign="top" style="border-bottom: 1px solid gray; padding-bottom: 10px;")
-        = text_field_tag "locale_long_descriptions[]", longdesc, { :id => "locale_long_description_#{locale_name}", :maxlength => 255, :style => "width:495px" }
- 
+          %tr
+            %td
+              = label_tag "locale_long_description_#{locale_name}", "<small>#{h(t :long_description, :scope => [:di, :lookups, :items])}:</small>"
+            %td= spacer
+            %td
+              = text_field_tag "locale_long_descriptions[]", longdesc, { :id => "locale_long_description_#{locale_name}", :maxlength => 255, :style => "width:395px;" }

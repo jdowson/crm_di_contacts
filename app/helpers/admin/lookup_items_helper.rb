@@ -3,7 +3,7 @@ module Admin::LookupItemsHelper
 
   #----------------------------------------------------------------------------
   def cbx_locale_handler(locale)
-    "$('locale_long_description_#{locale}').disabled=!this.checked"
+    "$('localeform_#{locale}').toggle()"
   end
   
   #----------------------------------------------------------------------------
