@@ -1,3 +1,4 @@
+
 sendd __FILE__, "Booting"
 
 class DICoreFFViewHooks < FatFreeCRM::Callback::Base

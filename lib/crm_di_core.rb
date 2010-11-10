@@ -25,3 +25,6 @@ end
 # Fat Free integration
 require File.join(File.dirname(__FILE__), "crm_di_core", "fat_free_view_hooks")
 require File.join(File.dirname(__FILE__), "crm_di_core", "fat_free_view_helpers")
+require File.join(File.dirname(__FILE__), "crm_di_core", "lookup_cache")
+
+
