@@ -233,23 +233,23 @@ class Admin::LookupsController < Admin::ApplicationController
   end
 
   #----------------------------------------------------------------------------
-  # PUT /admin/lookups/1/cacheupdate
-  # PUT /admin/lookups/1/cachupdate.xml                                    AJAX
+  # PUT /admin/lookups/1/cacheupdate.xml
+  # PUT /admin/lookups/1/cachupdate.js                                     AJAX
   #----------------------------------------------------------------------------
-  def cacheupdate
+  def update_cache
     
     DILookupCache.reload
     
     flash[:notice] = t(:msg_cache_updated, :scope => [:di, :lookups])
     
     respond_to do |format|
-      format.js   # cacheupdate.js.rjs
+      format.js   # update_cache.js.rjs
       format.xml  { head :ok }
     end
 
   end
-
     
+
   private
 
   #----------------------------------------------------------------------------

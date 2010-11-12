@@ -22,7 +22,7 @@ en-US:
     move_down:          Move Down
     delete:             Delete
     show_all:           Show All
-
+    cancel:             Cancel
 
     audit_information:  Audit Information
     audit_intro:        ""
@@ -51,10 +51,12 @@ en-US:
       save_lookup:              Save Lookup
       parent_lookups:           Lookup Path
       for_parent:               for
-      cacheupdate:              Update Cache
-
       name:                     Lookup Name
       description:              Description
+
+      update_cache_caption:     Update Cache
+      update_cache_button:      Update Cache
+      msg_update_cache:         "Are you sure you want to update the application lookup cache?"
 
       confirm_delete:           Are you sure you want to delete this lookup?
       msg_cant_delete:          "^Couldn't delete the %{value} lookup as it has child lookups."

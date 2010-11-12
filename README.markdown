@@ -29,6 +29,10 @@ Where [source] can be, according to your needs, one of:
 >  HTTP:
 >    `https://jdowson@github.com/jdowson/crm_di_core.git`
 
+The plugin needs a number of image files which need to be available in the application's `public` folder. These can be copied manually from the plugin's `public` folder, or installed automatically by running:
+
+>  `rake crm:di_core:setup`
+
 The database migration is currently under development, however the plugin does create a rake task:
 
 >  `rake db:migrate:di_core`
