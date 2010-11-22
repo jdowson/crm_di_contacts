@@ -1,16 +1,15 @@
 
-sendd __FILE__, "Booting"
-
-module CrmDICore
+module CRMDICore
 
   module FFViewHelpers
 
-    def side_bar_item(c, s)
-      "#{c}: <b style='color:#{DILookupCache.l_itemcolor("color", s)}'>#{DILookupCache.l_itemldesc("color", s)}</b>"
+    def side_bar_item(caption, id)
+      "<div>#{caption}: <b style='color:#{lkup_color(id)}'>#{lkup_ld(id)}</b></div>" unless id.nil?
     end
 
   end
+
 end
 
-ActionView::Base.send(:include, CrmDICore::FFViewHelpers)
+ActionView::Base.send(:include, CRMDICore::FFViewHelpers)
  

@@ -19,7 +19,7 @@
     %tr
       %td(valign="top")
         .label.top.req #{t :item_type, :scope => [:di, :lookups, :items]}:
-        = f.select :item_type, options_for_select([ "Editable", "Standard", "Non-selectable" ], @lookup_item.item_type), { :include_blank => false }, { :style => "width:240px" }
+        = f.select :item_type, options_for_select([[t(:standard, :scope => [:di, :lookups, :items]) ,"Standard"],[t(:grouping, :scope => [:di, :lookups, :items]) ,"Grouping"],[t(:separator, :scope => [:di, :lookups, :items]) ,"Seperator"]], @lookup_item.item_type), { :include_blank => false }, { :style => "width:240px" }
       %td= spacer
       %td(valign="top")
         .label.top #{t :html_color, :scope => [:di, :lookups, :items]}:

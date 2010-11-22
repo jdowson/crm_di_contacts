@@ -35,6 +35,11 @@ en-US:
     created_at_small:   created
     updated_at_small:   updated
 
+    contacts:
+      type:               Type
+      type_help:          Role of the contact
+      sub_type:           Subtype
+
     #----------------------------------------------------------------------------
     # Lookups.
     #----------------------------------------------------------------------------
@@ -87,5 +92,11 @@ en-US:
         description:              Description
         long_description:         Long Description
         item_type:                Type
+        item_type_small:          type
         html_color:               HTML Color
         language:                 Language code
+
+        # Types
+        separator:                Separator
+        standard:                 Standard
+        grouping:                 Grouping

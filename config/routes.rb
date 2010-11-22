@@ -2,6 +2,7 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.match   'messagebox/:caption/:icon/*buttons', :controller => 'messagebox', :action => 'show'
+  map.match   'lookups/get_children', :controller => 'lookups', :action => 'get_children'
   
   map.namespace :admin do |admin|
 

@@ -31,9 +31,12 @@
     %tt
       = " - #{h(lookup_item.code)}"
 
-    - unless lookup_item.lookup.lookups.empty?
-      %br
-      %tt
+    %br
+    %tt
+      = "#{t :item_type_small, :scope=> [:di, :lookups, :items]}: #{t(lookup_item.item_type.downcase.to_sym, :scope=> [:di, :lookups, :items]).downcase}" 
+    
+      - unless lookup_item.lookup.lookups.empty?
+        = " | "
         #{t :child_items_small, :scope=> [:di, :lookups, :items]}: 
         = render :partial => "lookup_item_child_lookup", :collection => lookup_item.lookup.lookups, :locals => { :parent_id => lookup_item.id }
 
