@@ -1,14 +1,21 @@
-crm_di_core
-===========
+crm_di_contacts
+===============
 
 Overview
 --------
 
-Experimental plugin module for [Fat Free CRM][2], with the initial target of:
+** NOT READY FOR USE AT THE MOMENT - IN PROCESS OF REARRANGING REPOSITORIES TO SEPERATE TEST HARNESS CODE OUT OF crm_di_core **
 
-* Exploring a range of integration points for plugin functionality to [Fat Free CRM][2]
-* As an example, providing end user (administrator) functionality to manage drop down list values that can then be used in extensions to Fat Free CRM entities as well as a wholey new models that can be integrated with the core product.
-* Erm...working out how all this rails stuff hangs together anyway.
+For the moment this plugin simply acts as a test harness for the [crm_di_core][4] plugin for [Fat Free CRM][2], adding a contact type and subtype to the *contact* model, using the *lookup* functionality in the core module.
+
+This demonstrates the use of the *lookup* admin functionality to maintain cascading dropdown list values, integration of the lookup cache to reduce round trips to the database and the ease with which interacting controls can be added to forms using Fat Free view hooks.
+
+The final target version will add further functionality to allow more flexible contact (and account) associations:
+
+
+* Multiple associations between contacts, accounts and other models. For example, allowing several contacts, potentially associated with different accounts to be linked to an opportunity with specific roles such as 'influencer', 'decision maker', 'implementation partner'. 
+* Allowing these links to extend the list of related opportunities/leads etc. displayed for each contact/account.
+* Allowing these relationships to be n-tier, for example allowing 'head office', 'regional office', 'branch' relationships to be maintained for accounts, with the ability to roll-up data such as opportunities for higher tiers while storing the opportunity at the lowest tier.
 
 
 Installation
@@ -21,21 +28,17 @@ From the root of your Fat Free CRM installation run:
 Where [source] can be, according to your needs, one of:
 
 > SSH:
->    `git@github.com:jdowson/crm_di_core.git`
+>    `git@github.com:jdowson/crm_di_contacts.git`
 >
 > Git: 
->    `git://github.com/jdowson/crm_di_core.git`
+>    `git://github.com/jdowson/crm_di_contacts.git`
 >
 > HTTP:
->    `https://jdowson@github.com/jdowson/crm_di_core.git`
-
-The plugin needs a number of image files and additional *prototype* javascript libraries which need to be available in the application's `public` folder. These can be copied manually from the plugin's `public` folder, or installed automatically by running:
-
->  `rake crm:di:core:setup`
+>    `https://jdowson@github.com/jdowson/crm_di_contacts.git`
 
 The database migrations required for the plug can be installed with the following command:
 
-> `rake db:migrate:plugin NAME=crm_di_core`
+> `rake db:migrate:plugin NAME=crm_di_contacts`
 
 ...that can be run from the Fat Free CRM installation root.
 
@@ -57,11 +60,13 @@ These commands respond to the usual rake environment options, such as `RAILS_ENV
 Tests
 -----
 
-*rspec* tests in the `spec` directory are not currently pushed to [github][3] as, for the time being they are **much** more buggy than the code they are intended to test, so the *develop_test_scripts* branch is staying local for now!
+See the *readme* for the [crm_di_core][4] repository for general comments on tests.
 
 
 Copyright (c) 2010 [Delta Indigo Ltd.][1], released under the MIT license
 
-[1]: http://www.deltindigo.com/             "Delta Indigo"
-[2]: http://www.fatfreecrm.com/             "Fat Free CRM"
-[3]: http://www.github.com/                 "github"
+[1]: http://www.deltindigo.com/                 "Delta Indigo"
+[2]: http://www.fatfreecrm.com/                 "Fat Free CRM"
+[3]: http://www.github.com/                     "github"
+[4]: https://github.com/jdowson/crm_di_contacts "crm_di_core"
+
