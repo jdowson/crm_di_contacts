@@ -1,8 +1,0 @@
-= render :partial => "sidebar_index_parent", :object => LookupItem.find(sidebar_index_parent.parent_id) unless sidebar_index_parent.parent_id.nil?
-
-.discopeside
-  %b= link_to(sidebar_index_parent.lookup.name, admin_child_lookup_items_path(:lookup_id => sidebar_index_parent.lookup_id, :lookup_item_id => nilz(sidebar_index_parent.parent_id)))
-  %br
-  = "#{html_description(sidebar_index_parent)} (#{sidebar_index_parent.code})"
-&nbsp;&nbsp;&nbsp;&nbsp;&dArr;
-%br

@@ -1,5 +1,5 @@
 
-# crm_di_core
+# crm_di_contacts
 # init.rb
 # Plugin initialization point
 #
@@ -9,24 +9,15 @@
 require "fat_free_crm"
 
 # Plugin Registration
-FatFreeCRM::Plugin.register(:crm_di_core, initializer) do
+FatFreeCRM::Plugin.register(:crm_di_contacts, initializer) do
 
-          name "Fat Free Delta Indigo Core"
+          name "Fat Free Delta Indigo Contacts module"
        authors "Delta Indigo"
        version "0.1"
-   description "Adds baseline Delta Indigo enhancements to Fat Free CRM"
-  dependencies :haml, :simple_column_search
-
-  # Remove non-functional admin tabs
-  tab :admin do |tabs|
-#    tabs.delete_at(1)                                 # Delete settings tab.
-#    tabs.delete_at(1)                                 # Delete plugins tab.
-  end
-  
-  # New admin tabs
-  tab :admin, :text => "Lookups", :url => { :controller => "lookups" }
+   description "Adds Delta Indigo contacts enhancements to Fat Free CRM"
+  dependencies :crm_di_core
 
 end
   
-# delegate the rest to lib/crm_di_core.rb
-require File.join(File.dirname(__FILE__), "lib", "crm_di_core")
+# delegate the rest to lib/crm_di_contacts.rb
+require File.join(File.dirname(__FILE__), "lib", "crm_di_contacts")

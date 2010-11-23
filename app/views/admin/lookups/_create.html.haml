@@ -1,9 +1,0 @@
-- remote_form_for([:admin, @lookup], :html => one_submit_only(:lookup).merge({:autocomplete => 'off'})) do |f|
-  = link_to_close new_admin_lookup_path
-  = f.error_messages
-  = render :partial => "admin/lookups/profile", :locals => { :f => f }
-  .buttonbar
-    = f.submit t(:create, :scope => [:di, :lookups])
-    #{t :or}
-    = link_to_cancel new_admin_lookup_path
- 

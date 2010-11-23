@@ -1,102 +1,12 @@
 en-US:
 
-  #----------------------------------------------------------------------------
-  # Limited global additions.
-  #----------------------------------------------------------------------------
-  lookups_small:       lookups
-
   di:
 
-    #----------------------------------------------------------------------------
-    # Plugin wide strings.
-    #----------------------------------------------------------------------------
-    active:             Active
-    inactive:           Inactive
-    unpublished:        Unpublished
-
-    activate:           Activate
-    inactivate:         Inactivate
-    publish:            Publish
-    unpublish:          Unpublish
-    move_up:            Move Up
-    move_down:          Move Down
-    delete:             Delete
-    show_all:           Show All
-    cancel:             Cancel
-
-    audit_information:  Audit Information
-    audit_intro:        ""
-
-    locales:            Locales
-    locales_intro:      Use this section to set international versions of lookup items
-
-    created_at:         Created
-    updated_at:         Updated
-    created_at_small:   created
-    updated_at_small:   updated
-
     contacts:
+      #----------------------------------------------------------------------------
+      # Plugin wide strings.
+      #----------------------------------------------------------------------------
       type:               Type
       type_help:          Role of the contact
       sub_type:           Subtype
 
-    #----------------------------------------------------------------------------
-    # Lookups.
-    #----------------------------------------------------------------------------
-    lookups:
-
-      title:                    Lookups
-      lookup:                   Lookup
-      details:                  Lookup Details
-      root:                     All Top-Level Lookups
-      create:                   Create Lookup
-      create_child:             Create Child Lookup
-      children:                 Child Lookups
-      child_count_small:        child lookups
-      save_lookup:              Save Lookup
-      parent_lookups:           Lookup Path
-      for_parent:               for
-      name:                     Lookup Name
-      description:              Description
-
-      update_cache_caption:     Update Cache
-      update_cache_button:      Update Cache
-      msg_update_cache:         "Are you sure you want to update the application lookup cache?"
-
-      confirm_delete:           Are you sure you want to delete this lookup?
-      msg_cant_delete:          "^Couldn't delete the %{value} lookup as it has child lookups."
-      msg_cache_updated:        "The application lookup cache has been updated."
-
-      items:
-
-        # General Captions
-        title:                    Lookup Items
-        create:                   Create Lookup Item
-        save:                     Save Lookup Item
-        child_items_small:        child items
-        all_lookups:              all lookups
-        sort_a_z_description:     Sort Description
-        sort_a_z_code:            Sort Code
-        publish_all:              Publish All
-        for_parent:               for
-        empty_description:        Empty Description
-        locales:                  Locales
-        locales_intro:            Use this section to set international versions of lookup items
-
-        # Prompts
-        confirm_delete:           Are you sure you want to delete this lookup item?
-        msg_cant_delete:          "^Couldn't delete the %{value} lookup item as it has child items."
-
-        # Form Fields
-        code:                     Code
-        description:              Description
-        long_description:         Long Description
-        item_type:                Type
-        item_type_small:          type
-        html_color:               HTML Color
-        language:                 Language code
-
-        # Types
-        separator:                Separator
-        standard:                 Standard
-        grouping:                 Grouping

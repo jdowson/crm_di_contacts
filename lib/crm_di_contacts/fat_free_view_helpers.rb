@@ -1,9 +1,9 @@
 
-module CRMDICore
+module CRMDIContacts
 
   module FFViewHelpers
 
-    def side_bar_item(caption, id)
+    def contact_side_bar_item(caption, id)
       "<div>#{caption}: <b style='color:#{lkup_color(id)}'>#{lkup_ld(id)}</b></div>" unless id.nil?
     end
 
@@ -11,5 +11,4 @@ module CRMDICore
 
 end
 
-ActionView::Base.send(:include, CRMDICore::FFViewHelpers)
- 
+ActionView::Base.send(:include, CRMDIContacts::FFViewHelpers)

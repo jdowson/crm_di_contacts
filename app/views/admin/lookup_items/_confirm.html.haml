@@ -1,5 +1,0 @@
-.confirm[@lookup_item, :confirm]
-  #{t :confirm_delete, :scope => [:di, :lookups, :items]}
-  #{t :delete} <b>#{@lookup_item.description}</b>?
-  = link_to_delete(@lookup_item) << " : "
-  = link_to_function(t(:no_button), "crm.flick('#{dom_id(@lookup_item, :confirm)}', 'remove')")

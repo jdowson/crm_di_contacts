@@ -1,9 +1,0 @@
-page.call "crm.flip_form", :create_lookup
-
-if params[:cancel] != "true"
-  page[:create_lookup].replace_html :partial => "create"
-  page.call "crm.set_title", :create_lookup, t(:create, :scope => [:di, :lookups])
-else
-  page.call "crm.set_title", :create_lookup, t(:title, :scope => [:di, :lookups])
-end
- 

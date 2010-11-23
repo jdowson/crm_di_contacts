@@ -1,6 +1,0 @@
-id = dom_id(@lookup_item, :confirm)
-page << "if ($('#{id}')) {"
-  page.call "crm.flick", id, :remove
-page << "} else {"
-  page.insert_html :top, dom_id(@lookup_item), :partial => "confirm"
-page << "}" 
