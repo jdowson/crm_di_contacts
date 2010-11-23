@@ -4,8 +4,6 @@ crm_di_contacts
 Overview
 --------
 
-** NOT READY FOR USE AT THE MOMENT - IN PROCESS OF REARRANGING REPOSITORIES TO SEPERATE TEST HARNESS CODE OUT OF crm_di_core **
-
 For the moment this plugin simply acts as a test harness for the [crm_di_core][4] plugin for [Fat Free CRM][2], adding a contact type and subtype to the *contact* model, using the *lookup* functionality in the core module.
 
 This demonstrates the use of the *lookup* admin functionality to maintain cascading dropdown list values, integration of the lookup cache to reduce round trips to the database and the ease with which interacting controls can be added to forms using Fat Free view hooks.

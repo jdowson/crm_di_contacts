@@ -14,37 +14,13 @@ class DIContactsFFViewHooks < FatFreeCRM::Callback::Base
             = I18n.t(:type, :scope => [:di, :contacts]) << ":" 
             %small 
               = I18n.t(:type_help, :scope => [:di, :contacts])
-          = f.lookup_select :contact_type_id, "contact.type", { :include_blank => '[NO T]' }, { :style => "width:240px" }
+          = f.lookup_select :contact_type_id, { :lookup => "contact.type", :lookup_options => { :include_blank_if_empty => "[No Types Created]" } }, { :include_blank => "Select Type" }, { :style => "width:240px" }
         %td= spacer
         %td{ :valign => :top }
           #stype
             .label 
               = I18n.t(:sub_type, :scope => [:di, :contacts]) << ":"
-            = f.lookup_select :contact_sub_type_id, { :lookup => "contact.type.subtype", :parent => :contact_type_id, :lookup_options => { :select_first => false, :include_blank_if_empty => "NO SUBTYPES" } }, { :include_blank => "NO ST SEL" }, { :style => "width:240px" }
-      %tr
-        %td{ :valign => :top }
-          #sstype
-            .label 
-              Sub-subtype:
-            -#= f.lookup_select :contact_sub_sub_type_id, { :lookup => "contact.type.subtype.subsubtype", :parent => :contact_sub_type_id, :lookup_options => { :hide_element => "sstype" }  }, { }, { :style => "width:240px" }
-        %td= spacer
-        %td
-          #xdiv
-            .label
-              Unbound2:
-            = lookup_select_tag :new_ctrl2, { :lookup => "contact.type.subtype", :parent_id => @contact.contact_type_id, :parent_control => "contact_contact_type_id" }, @contact.contact_sub_type_id, { :style => "width:240px" }
-      %tr
-        %td
-          #ncdiv
-            .label
-              Unbound:
-            = lookup_select_tag :new_ctrl, {:lookup => "contact.type", :lookup_options => { :option_key_type => :code } }, @contact.contact_type_id, { :style => "width:240px" }
-        %td= spacer
-        %td{ :valign => :top }
-          #ostype
-            .label 
-              = I18n.t(:sub_type, :scope => [:di, :contacts]) << "X:"
-            -#= f.lookup_select :contact_osub_type_id, { :lookup => "contact.type.subtype.subsubtype", :parent_control => :new_ctrl, :parent_id => @contact.contact_type_id, :lookup_options => { :include_blank_if_empty => '[NO OST]', :hide_element => 'ostype', :parent_group => true } }, { }, { :style => "width:240px" }
+            = f.lookup_select :contact_sub_type_id, { :lookup => "contact.type.subtype", :parent => :contact_type_id, :lookup_options => { :include_blank_if_empty => "No Subtypes" } }, { }, { :style => "width:240px" }
 EOS
 
   HAML_CONTACT_SIDEBAR_EXT = <<EOS
