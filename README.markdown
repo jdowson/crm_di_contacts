@@ -68,5 +68,5 @@ Copyright (c) 2010 [Delta Indigo Ltd.][1], released under the MIT license
 [1]: http://www.deltindigo.com/                 "Delta Indigo"
 [2]: http://www.fatfreecrm.com/                 "Fat Free CRM"
 [3]: http://www.github.com/                     "github"
-[4]: https://github.com/jdowson/crm_di_contacts "crm_di_core"
+[4]: https://github.com/jdowson/crm_di_core     "crm_di_core"
 
