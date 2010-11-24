@@ -9,8 +9,8 @@ class AddTypeSubTypeToContacts < ActiveRecord::Migration
   end
 
   def self.down
-    remove_index  :contacts, :ix_contacts_type_code_sub_type_code
-    remove_column :contacts, :contact_type_code
-    remove_column :contacts, :contact_subtype_code
+    remove_index  :contacts, :ix_contacts_type_id_sub_type_id
+    remove_column :contacts, :contact_type_id
+    remove_column :contacts, :contact_subtype_id
   end
 end

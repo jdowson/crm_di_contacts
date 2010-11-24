@@ -47,7 +47,7 @@ Sample Data
 Sample *contact type* and *contact subtype* lookup fields may be created using the following *rake* command:
 
 > `rake crm:di:contacts:setup`
-`
+
 These fields initially contain no lookup values. Sample values can be installed with the following *rake* command:
 
 > `rake crm:di:contacts:demo`
