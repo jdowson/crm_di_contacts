@@ -14,13 +14,13 @@ class DIContactsFFViewHooks < FatFreeCRM::Callback::Base
             = I18n.t(:type, :scope => [:di, :contacts]) << ":" 
             %small 
               = I18n.t(:type_help, :scope => [:di, :contacts])
-          = f.lookup_select :contact_type_id, { :lookup => "contact.type", :lookup_options => { :include_blank_if_empty => "[No Types Created]" } }, { :include_blank => "Select Type" }, { :style => "width:240px" }
+          = f.lookup_select :contact_type_id, { :lookup_name => "contact.type", :include_blank_if_empty => "[No Types Created]" }, { :include_blank => "Select Type" }, { :style => "width:240px" }
         %td= spacer
         %td{ :valign => :top }
           #stype
             .label 
               = I18n.t(:sub_type, :scope => [:di, :contacts]) << ":"
-            = f.lookup_select :contact_sub_type_id, { :lookup => "contact.type.subtype", :parent => :contact_type_id, :lookup_options => { :include_blank_if_empty => "No Subtypes" } }, { }, { :style => "width:240px" }
+            = f.lookup_select :contact_sub_type_id, { :lookup_name => "contact.type.subtype", :parent => :contact_type_id, :hide_element_if_empty => "stype", :disable_if_empty => true }, { }, { :style => "width:240px" }
 EOS
 
   HAML_CONTACT_SIDEBAR_EXT = <<EOS
