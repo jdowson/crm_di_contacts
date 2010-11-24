@@ -15,7 +15,7 @@ FatFreeCRM::Plugin.register(:crm_di_contacts, initializer) do
        authors "Delta Indigo"
        version "0.1"
    description "Adds Delta Indigo contacts enhancements to Fat Free CRM"
-  dependencies :crm_di_core
+#  dependencies :crm_di_core
 
 end
   
