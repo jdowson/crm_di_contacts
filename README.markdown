@@ -1,6 +1,8 @@
 crm_di_contacts
 ===============
 
+** NOTE: THE CURRENT VERSION REQUIRES VERSION 0.1.2 OR LATER OF THE crm_di_core MODULE **
+
 Overview
 --------
 
@@ -14,6 +16,12 @@ The final target version will add further functionality to allow more flexible c
 * Multiple associations between contacts, accounts and other models. For example, allowing several contacts, potentially associated with different accounts to be linked to an opportunity with specific roles such as 'influencer', 'decision maker', 'implementation partner'. 
 * Allowing these links to extend the list of related opportunities/leads etc. displayed for each contact/account.
 * Allowing these relationships to be n-tier, for example allowing 'head office', 'regional office', 'branch' relationships to be maintained for accounts, with the ability to roll-up data such as opportunities for higher tiers while storing the opportunity at the lowest tier.
+
+
+Prerequisites
+-------------
+
+This module requires the [crm_di_core][4] plugin **version 0.1.2 or later** for [Fat Free CRM][2] to be installed and setup as per the repository instructions.
 
 
 Installation
